@@ -150,3 +150,155 @@ Entendemos quando é interessante usar Elixir;
 Instalamos o Elixir e Erlang em nossa máquina;
 Conhecemos o terminal interativo do elixir (iex).
 
+#####
+
+@02-Tipos de dados
+
+@@01
+Básico da sintaxe
+
+[00:00] Olá, pessoal. Boas-vindas de volta a mais um capítulo desse treinamento, onde estamos conhecendo o Elixir e vamos entender um pouco da sintaxe básica de novo, vamos recapitular o que falamos no último vídeo e vamos começar a aprender um pouco sobre os tipos de dados.
+[00:13] Então para começar, como definimos uma variável em Elixir? Podemos colocar o seu nome, sinal de igual e algum valor, por exemplo, 2 variavel = 2. E para fazer operações com essa variável, eu posso utilizar os operadores matemáticos, sem segredo. Então, por exemplo, se eu quiser dividir o valor dessa variável por 2, eu posso utilizar o operador de divisão, variavel / 2.
+
+[00:34] E repara que eu recebi 1.0. Vamos inspecionar isso. Então vou chamar i (variavel / 2). Repara que esse termo é 1.0 e o tipo desse dado e float. Então tem o nosso primeiro detalhe, que esse operador, o operador de divisão, sempre nos retorna um float, um número flutuando, um número decimal, mesmo que seja um inteiro.
+
+[01:00] E outro detalhe interessante sobre inteiros, é que eles teoricamente não possuem limites iguais a outras linguagens. Por exemplo, em Java ou até em C-Sharp, temos o tipo inteiro e temos outro tipo, big integer ou algo assim, para suportar números maiores.
+
+[01:16] Em Elixir você consegue utilizar um valor inteiro super gigante. Então se eu tiver um número super gigante, o Elixir ainda vai interpretar isso como um inteiro e não como algum tipo especial de big integer ou algo assim.
+
+[01:31] “Vinicius, eu quero realizar uma divisão, mas eu sei que os dois operadores são inteiros, então como eu consigo recuperar esse valor como inteiro se eu quiser?”. Posso chamar a função div. Então lembrando de novo que nós temos duas formas de chamar funções, posso chamar com variável e passando o número 2 div(variavel, 2, ou seja, estou dividindo o valor que está em variável pelo 2. Posso fazer dessa forma ou então div variável , 2, sem os parênteses.
+
+[01:58] Então repara que eu preciso dessa vírgula ainda, e se eu inspecionar o valor que vamos trazer dessa divisão, i(div(variável, 2)), vamos ter um tipo inteiro.
+
+[02:13] E se eu precisar pegar o resto da divisão, eu posso utilizar a versão remanescente. Então rem(variável, 2), se eu pegar o resto dela, é 0.
+
+[02:25] Então dessa forma conseguimos realizar operações, claro, todas as outras, variável +2, variável -2, *2, então temos todas as operações matemáticas de forma bem simples e um detalhe, que talvez você já tenha percebido, sempre o retorno de uma função já é exibido para nós direto no nosso terminal. Não precisamos exibir algo.
+
+[02:51] Mas se eu quiser por algum motivo fazer a exibição, podemos utilizar a função IO.puts(“Teste”), que é de put string, colocar uma string na saída. Então se eu colocar um teste, por exemplo, ele vai exibir esse teste e nos retorna o valor correto.
+
+[03:06] Então vamos falar um pouco mais sobre esses dois tipos, o de texto e o tipo ok, vamos ver se isso é um tipo. Mas tudo isso nos próximos vídeos.
+
+@@02
+Strings
+
+[00:00] Olá, pessoal. Boas-vindas de volta. Então já vimos bastante sobre chamadas de função e aquelas duas sintaxes diferentes, falamos bastante sobre os números, os formatos numéricos em Elixir, que são o float e integer, ou seja, inteiro, agora vamos falar de texto.
+[00:16] Então eu utilizei o teste e o primeiro detalhe sobre strings em Elixir é que elas sempre precisam estar entre aspas duplas. Algumas linguagens, como JavaScript e PHP, permitem você utilizar tanto faz, aspas simples ou aspas duplas. Em Elixir existe uma diferença, uma string é sempre em aspas duplas, já entre aspas simples, dizemos que é uma lista de caracteres, uma char list. Então se eu fizer algo assim, i ‘teste’.
+
+[00:40] Repara que eu tenho uma lista. Então não vamos utilizar esse tipo nesse treinamento, vamos nos ater a strings. Então repara que é diferente. Nesse caso eu tenho uma string de bits.
+
+[00:53] Então conseguimos inclusive ver a representação dela em binário, nesse caso o número está em decimal, mas se eu converter para binário, eu tenho a representação dela. E outro detalhe, falando de representação, é que strings em Elixir já são por padrão em UTF-8. Várias outras linguagens têm algum problema para trabalhar com Unicode, já Elixir não, por padrão as strings já são armazenadas utilizando UTF-8.
+
+[01:15] Se você não sabe bem o que é char setting, coding, essas coisas, eu vou no deixar no “Para saber mais” um link de um post de blog explicando o que é char setting, coding, o que é esse tal de UTF-8, mas caso você já saiba, Elixir já trabalha por padrão com UTF-8.
+
+[01:31] Inclusive se eu pegar “Vinícius”, o meu nome por padrão não tem acento, mas se eu quiser utilizar, primeiro, não vamos ter problema nenhum, eu posso verificar o número de bytes, então byte_size(“Vinicius”). Então temos 9 bytes, mas meu nome tem 8 caracteres.
+
+[01:54] Então repara que essa minha letra i com acento agudo está ocupando 2 bytes, está ocupando um byte a mais. Então o Elixir já trata isso tudo de forma bem transparente para nós. Se algum momento eu precisar, de alguma forma, pegar o tamanho dessa string e o número de caracteres dela, eu posso utilizar String.length(“Vinícius”).
+
+[02:18] Então eu tenho o número de bytes é 9, mas o tamanho da string é de 8 caracteres. Então com isso já começamos a ver algumas coisas interessantes e assim como existem operadores numéricos, que são os operadores matemáticos, com string também podemos ter operadores.
+
+[02:35] Então imagino que eu tenha o meu nome armazenado e esse nome veio de um formulário da web, veio da entrada do terminal, veio de um dispositivo que pega através de internet das coisas e eu quero adicionar isso a uma frase, por exemplo, “Bem-vindo Vinícius”. Eu posso fazer isso com “Bem-vindo” e eu vou concatenar, ou seja, eu vou juntar duas string, a string bem-vindo com a string que está na minha variável nome. E se eu quiser adicionar um ponto depois, eu posso concatenar uma outra string, ”Bem-vindo “ <> nome <> “-“
+
+[03:05] Então os sinais de maior e de menor formam o operador de concatenação, de junção de strings. Se eu executo isso, “Bem-vindo Vinícius”.
+
+[03:15] Outra forma de utilizarmos variáveis dentro de string, ao invés de ficar concatenando, podemos fazer o que conhecido como interpolação. Essa palavra difícil permite termos variáveis dentro da nossa string. Então eu posso ter, por exemplo, “Bem-vindo #{nome}.” e com essa sintaxe eu adiciono o nome, eu adiciono a variável que vai ser interpretada. E depois tudo que vier já não é mais interpretado como a variável.
+
+[03:43] Então hashtag, abre chaves, coloca o nome da variável e fecha chaves. Com isso temos exatamente o mesmo resultado utilizando a interpolação.
+
+[03:56] Para finalizar esse assunto de strings, que eu não vou me alongar muito, temos, como na maioria das outras linguagens, caracteres de escape. Então, por exemplo, se eu quiser quebrar a linha depois do “Bem-vindo” e depois exibir um nome. Eu posso utilizar \N para representar uma quebra de linha, ”Bem-vindo/n #{nome}.”.
+
+[04:14] Mas não quebrou a linha nesse caso porque eu não estou exibindo isso, só foi o meu retorno. Se eu fizer IO.puts(”Bem-vindo/n #{nome}.”) eu tenho “Bem-vindo”, quebra de linha “Vinícius”.
+
+[04:29] Então dessa forma conseguimos trabalhar com strings, tem muita coisa que podemos falar de strings em si, como você reparou, conseguimos ver a representação dessa string em binário, no caso, óbvio, em números decimais, mas podemos pegar esse binário.
+
+[04:44] Conseguimos tratar outros tipos de dados como string, só que não vou me aprofundar muito, porque isso, conforme a necessidade vai surgindo, vamos falando e vamos trabalhando. Agora, além de números e strings, temos outros tipos, que eu gosto de chamar tipos complexos, ou seja, que não são um único tipo, que podem ser conjuntos de vários tipos, podem ser estruturas de dados.
+
+[05:05] Então vamos começar a colocar o pé nesses tipos complexos e vamos falar de lista a partir do próximo vídeo.
+
+@@03
+Para saber mais: UTF-8?
+
+Neste vídeo nós falamos sobre Strings em Elixir. Diferentemente de algumas linguagens, Elixir já trabalha com UTF-8 por padrão, facilitando algumas tarefas.
+Se você quiser entender melhor o que significa trabalhar com UTF-8, pode dar uma olhada no seguinte texto:
+
+Charsets e Encodings: Como strings funcionam
+E para mais detalhes sobre Strings em Elixir, pode conferir aqui:
+
+Binaries, strings, and charlists
+
+https://dias.dev/2021-08-24-charsets-e-encodings-como-strings-funcionam/
+
+https://elixir-lang.org/getting-started/binaries-strings-and-char-lists.html
+
+@@04
+Listas
+
+[00:00] Olá, pessoal. Boas-vindas de volta. Então vamos falar um pouco sobre listas. Como podemos definir uma lista utilizando Elixir.
+[00:05] Então vou criar uma variável chamada primeira_lista = [1, 2, 3] e ela vai ser uma lista de números. Então eu abro colchetes e posso adicionar vários elementos dentro dele. E esses elementos são separados por vírgula, quando eu executo, foi criada a nossa primeira lista.
+
+[00:23] Então se eu der uma olhada utilizando i, i primeira_lista, vemos que o tipo de dado é uma lista. E essas listas não precisam ter todos os elementos contendo o mesmo tipo. Então vou criar uma nova lista, eu posso ter [1, “Dois”, :três, 4.0] e isso tudo vai funcionar sem problema nenhum.
+
+[00:50] Então uma lista é basicamente um conjunto de elementos, é realmente uma lista de elementos. E a ordem em que adicionamos esses elementos é mantida. E como isso funciona por baixo dos panos? Se você vem de alguma linguagem como Java, C-Sharp, você pode conhecer essa sintaxe como arrays ou até de C++, JavaScript, PHP. A maioria das linguagens utiliza essa sintaxe de colchetes para definir arrays, para definir vetores, como alguns podem chamar em português.
+
+[01:20] Mas, em Elixir, essa sintaxe está criando, na verdade, uma lista ligada. O que isso quer dizer? Nesse primeiro elemento temos o elemento em si, o valor desse elemento, que no caso é 1 e um ponteiro para o próximo elemento, no caso é o “Dois”. Então nessa segunda posição temos o elemento em si e o ponteiro para o espaço da memória onde temos a próxima posição. Então, esses elementos não são agrupados na memória como um vetor é, eles não necessariamente vão estar juntos na memória.
+
+[01:51] Então você adicionar um item ao final dessa lista é um processo custoso. Precisamos percorrer todos os elementos da lista, pegar o último e nesse último adicionar um ponteiro para um novo elemento que vai estar armazenado na memória. Agora o contrário é muito rápido, adicionar um elemento no início dessa lista é super rápido. Como podemos fazer isso? Tem algumas formas.
+
+[02:14] Primeiro vamos falar daquela operação custosa que eu falei de adicionar um item no final. Podemos fazer isso de várias formas, mas vamos utilizar o operador ++, que junta duas listas. Então eu posso pegar minha primeira lista e adicionar valores de outras listas. Então se eu tenho 123, eu vou adicionar o primeira_lista ++ [4, 5, 6].
+
+[02:37] Então quando eu executo esse código, o meu retorno é uma lista condensada com todos esses valores. Se eu quiser, por exemplo, remover o número 2 dessa lista, eu posso fazer utilizando esse operador primeira_lista -- [2]. Então repara que agora temos o 1 e o 3.
+
+[02:50] Mas onde está o 4, 5 e 6 que eu adicionei? Esse operador não altera o valor que está em primeira lista, ele cria uma nova lista e retorna para nós. Mas não armazenamos essa lista em nenhuma variável, então foi jogado fora. Nossa primeira lista continua tendo os valores 1, 2 e 3.
+
+[03:09] Então esse é outro detalhe que vamos falar mais para frente sobre imutabilidade. Mas vamos continuar. Como eu comentei, existe mais de uma forma de manipularmos listas e existe outro operador que nos permite pegarmos o que é chamado de head ou a cabeça dessa lista e a cauda dessa lista, tail. Então head de uma lista, a cabeça de uma lista é o seu primeiro elemento. Isso é muito fácil de encontrarmos.
+
+[03:34] E o tail, a cauda dessa lista, é a lista que contém todos os outros elementos, o restante de tudo, tudo menos o início. Então eu posso pegar a cabeça através da função HD, por exemplo, de head. Então se eu fizer hd primeira_lista, eu tenho o primeiro elemento. E se eu pegar o tail, que é o tl primeira_lista, eu vou ter o restante todo.
+
+[04:00] Mas eu falei de um operador, certo? Eu consigo lidar com esse conceito de head e tail através do operador chamado de cons. O que podemos fazer? Eu posso criar uma nova lista utilizando esse operador e eu vou dizer que essa lista consiste em um head novo, uma cabeça nova, que vai ser o elemento 0 e o tail vai ser a nossa primeira lista, [0 | primeira_lista].
+
+[04:26] Então o que eu estou fazendo? Estou basicamente adicionando no início da lista o elemento 0, então repara que ele retorna isso para nós.
+
+[04:34] Esse operador vai ser muito útil quando falarmos de pattern matching. Mas eu já vou te dar um spoiler. Eu posso dizer que eu tenho a variável 0 e a variável resto da lista. E isso vai ser atribuído, vamos fazer o match com esse valor. Então deixa eu copiar e colar, [zero, resto] = [0 | primeira_lista].
+
+[04:54] O que eu estou fazendo? Esse elemento que eu estou criando vai ser igual a essa lista 0, 1, 2, 3. Vou até utilizar aquilo para ficar mais claro, [zero, resto] = [0, 1, 2, 3, 4]. E o que eu vou fazer? Eu vou pegar o 0 como sendo a cabeça da nossa lista, vou utilizar o operador de cons e vou pegar o resto todo, que vai ser o restante da nossa lista, [zero | resto] = [0, 1, 2, 3, 4].
+
+[05:23] Quando eu faço isso, o retorno é a lista em si, mas o que eu vou agora, em 0, é o valor da nossa cabeça, do início da nossa lista. E o valor de resto vai ser o nosso tail, o restante da nossa lista, tirando o elemento 0.
+
+[05:37] Então talvez tenha confundido um pouco, então vamos recapitular. Listas em Elixir são listas simples, são listas ligadas simples, ou seja, um elemento tem o ponteiro para o próximo elemento sempre. Então pegar o elemento de número 3000 é uma operação custosa, é uma operação demorada, precisamos ir percorrendo cada um dos itens até chegar nesse 3000.
+
+[05:59] Além desse detalhe, é custoso adicionar um item no final, mas é bastante barato, é bastante simples adicionar um item no início, porque podemos pegar esse elemento e aponta-lo para o restante da lista. Então o transformamos na cabeça.
+
+[06:13] E o conceito de cabeça e cauda, head e tail em Elixir é isso, cabeça é o primeiro elemento, tail é a lista de todos os elementos restantes. E através do operador cons conseguimos fazer coisas bem interessantes com isso, como, por exemplo, utilizando pattern matching, que vamos falar mais para frente o que é, eu consigo criar duas variáveis pegando a cabeça e a cauda dessa lista, eu consigo adicionar uma nova cabeça utilizando esse operador.
+
+[06:40] Então o cons, esse operador cons, ele basicamente trata a primeira parte, o que vem antes dele como a cabeça e o que vem depois como a cauda, como o resto da lista. Então depois de toda essa confusão de listas, vamos para os exercícios para fixar esses detalhes, vou deixar um link para um “Para saber mais”, para você ter todos os detalhes.
+
+[07:00] Mas esses não são os únicos tipos em Elixir, como eu falei, além dos tipos que eu Vinicius chamo de simples, que são os números e texto, temos números complexos. Vimos a lista só que existem vários outros tipos. Então no próximo capítulo vamos falar um pouco mais sobre outros tipos de dados em Elixir.
+
+@@05
+Para saber mais: Listas
+
+Neste vídeo nós vimos alguns detalhes sobre listas. Vimos que elas são listas ligadas e não vetores como em algumas outras linguagens. Aprendemos as vantagens e desvantagens dessa abordagem.
+Para entender melhor alguns detalhes sobre listas em Elixir, super recomendo que você dê uma olhada no guia oficial:
+
+(Linked) Lists
+Se quiser se aprofundar ainda mais nas possibilidades das listas do Elixir, pode conferir a documentação deste tipo de dados:
+
+List
+
+https://elixir-lang.org/getting-started/basic-types.html#linked-lists
+
+https://hexdocs.pm/elixir/List.html
+
+@@06
+Faça como eu fiz
+
+Chegou a hora de você seguir todos os passos realizados por mim durante esta aula. Caso já tenha feito, excelente. Se ainda não, é importante que você execute o que foi visto nos vídeos para poder continuar com a próxima aula.
+
+Continue com os seus estudos, e se houver dúvidas, não hesite em recorrer ao nosso fórum!
+
+@@07
+O que aprendemos?
+
+Nesta aula, aprendemos:
+Aprendemos a criar variáveis e vimos os operadores matemáticos;
+Aprendemos sobre strings no Elixir;
+Conhecemos as listas do Elixir.
