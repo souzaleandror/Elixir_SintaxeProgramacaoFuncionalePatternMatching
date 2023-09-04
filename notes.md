@@ -337,7 +337,6 @@ Mapas
 
 @@02
 Mapas vs Listas
-PRÓXIMA ATIVIDADE
 
 Vimos neste vídeo que podemos ter um mapeamento de um valor para outro no Elixir, gerando um conjunto de dados.
 Qual a principal diferença entre um mapa e uma lista?
@@ -353,7 +352,6 @@ Não há diferença. Por baixo dos panos é a mesma coisa.
 
 @@03
 Repetindo chaves
-PRÓXIMA ATIVIDADE
 
 Agora que já aprendemos sobre mapas, vamos ver um exemplo:
 %{"um" => 1, "dois" => 2, "um" => 3}COPIAR CÓDIGO
@@ -404,7 +402,6 @@ Atoms
 
 @@05
 Para saber mais: Keyword lists
-PRÓXIMA ATIVIDADE
 
 Tupla é um dos tipos de dados mais utilizados em Elixir. Juntando o conceito de tuplas (um conjunto de dados relacionados) com atoms, temos as keyword lists. Esse tipo de dados é muito parecido com mapas.
 Um detalhe interessante é que podemos simplificar a definição de keyword lists da seguinte forma:
@@ -424,7 +421,6 @@ https://elixir-lang.org/getting-started/keywords-and-maps.html#keyword-lists
 
 @@06
 Mapas vs Keyword lists
-PRÓXIMA ATIVIDADE
 
 Vimos nesse vídeo que temos acesso a uma estrutura de dados muito semelhante aos mapas quando usamos atoms: Keyword lists.
 Qual a diferença entre keyword lists e mapas?
@@ -475,7 +471,6 @@ Tuplas
 
 @@08
 Listas vs Tuplas
-PRÓXIMA ATIVIDADE
 
 Vimos neste vídeo outra estrutura de dados que armazena um conjunto de valores: Tuplas. Normalmente esta estrutura é usada para armazenar elementos relacionados, mas na prática, nada nos impede de usar uma lista para isso.
 Sendo assim, qual a diferença entre listas e tuplas, segundo o que vimos no vídeo?
@@ -533,7 +528,6 @@ Imutabilidade
 
 @@10
 Faça como eu fiz
-PRÓXIMA ATIVIDADE
 
 Chegou a hora de você seguir todos os passos realizados por mim durante esta aula. Caso já tenha feito, excelente. Se ainda não, é importante que você execute o que foi visto nos vídeos para poder continuar com a próxima aula.
 
@@ -541,7 +535,6 @@ Continue com os seus estudos, e se houver dúvidas, não hesite em recorrer ao n
 
 @@11
 O que aprendemos?
-PRÓXIMA ATIVIDADE
 
 Nesta aula, aprendemos:
 Falamos sobre Mapas;
@@ -549,3 +542,247 @@ Conhecemos o tipo de dados Atom;
 Aprendemos a usar tuplas;
 Conhecemos keyword lists;
 Aprendemos sobre imutabilidade no Elixir.
+
+####
+
+@04-Módulos
+
+@@01
+O que são módulos
+
+[00:00] Olá, pessoal. Boas-vindas de volta a mais um capítulo desse treinamento, onde estamos aprendendo o básico de Elixir. Então já vimos bastante coisa, falamos sobre sintaxe básica, operadores, tipos de dados e agora está na hora de começarmos a agrupar um pouco disso tudo que vimos em blocos de código. E normalmente blocos de código, em qualquer linguagem, chamamos de funções. E Elixir, por ser uma linguagem funcional, obviamente tem funções. Só que antes de começarmos a escrever funções, vamos entender alguns conceitos.
+[00:28] Primeiro, repara que quando eu chamei essa função inser_at, eu a chamei a partir de List. alguma coisa, List.insert_at. Eu também utilizei IO.puts. Então o que acontece? Em Elixir temos um conceito conhecido como módulo. O que é um módulo? É basicamente um agrupador de funções, conseguimos definir várias funções. Então a função insert_at está definida no módulo List.
+
+[01:02] Mas eu chamei algumas funções que não estão em nenhum módulo, por exemplo, elem, para pegar o elemento de uma tupla, hd para pegar a cabeça de uma lista ou tl para pegar a tale, a cauda de uma lista. Então existem funções que estão fora de um módulo? Não, elas estão dentro de um módulo padrão, que é o módulo Kernel. Então dentro desse módulo temos várias funções para não precisarmos chamar através do nome do módulo ponto o nome da função.
+
+[01:29] Então basicamente esse é o conceito de módulos. E para criarmos módulos e dentro desses módulos criarmos funções, obviamente não vamos ficar digitando no nosso terminal interativo. Por que eu não vou fazer isso? Porque não esperamos criar um programa que seja executado assim, através do terminal interativo, queremos criar um programa que a pessoa não precise digitar no terminal interativo os códigos, queremos enviar um arquivo e essa pessoa executa esse arquivo.
+
+[01:55] Então vamos começar a sair do terminal interativo e criar ainda códigos de script, ou seja, códigos que vão ser executados uma vez só, não vamos compilar ainda, só que vamos começar a escrever código em um editor de texto, um editor de código. Existem vários, você pode escolher o que você quiser. Como tende a ser mais comum, eu vou utilizar o VS Code. E para ele nos ajudar um pouco, eu vou instalar alguma extensão de Elixir, para ele ajudar com sintaxe highlight. Não vai ser uma IDE, mas ele pelo menos nos ajuda um pouco.
+
+[02:26] Então vou em “Extensões”, pesquisar Elixir e vou instalar a “vscode-elixir”, porque ela já está em uma versão estável.
+
+[02:34] E repara que eu já a instalei. Então, após instalado, você vai fechar o Visual Studio Code e vai abrir de novo. Com isso estamos prontos para começar a escrever código em Elixir no nosso editor. Mas isso vamos começar a fazer no próximo vídeo.
+
+@@02
+Propósito de módulos
+
+Vimos neste vídeo o que são módulos e como nós já usamos alguns durante o treinamento.
+Na prática, para que servem os módulos do Elixir?
+
+Para agrupar as definições de tipos de dados.
+ 
+Alternativa correta
+Para agrupar as definições de variáveis relacionadas.
+ 
+Alternativa correta
+Para agrupar as definições de funções.
+ 
+Alternativa correta! Todas as funções no Elixir precisam ser definidas dentro de algum módulo.
+
+@@03
+Criando um módulo
+
+[00:00] Olá, pessoal. Boas-vindas de volta. Então vamos começar a escrever algum código utilizando Elixir. E existem dois principais tipos de extensões de arquivo em Elixir. Eu vou criar “teste”, o nome do arquivo vai ser “teste”. E as extensões principais são ex, que é um código Elixir padrão e exs, que é um código de script em Elixir. Ou seja, não vamos compilar esse código, ele vai ser interpretado.
+[00:27] Então como estamos fazendo testes ainda e nesse primeiro curso só vamos fazer algumas brincadeiras, é esse o formato que vamos utilizar, “teste.exs”. Mais para frente utilizamos o formato em que podemos compilar. Então vamos nessa.
+
+[00:40] O que vamos fazer nesse arquivo de teste? Como eu tenho aquela extensão do VS Code, ele já está mostrando o símbolo do Elixir com S de script e eu consigo definir um módulo. Então lembra que para eu criar uma função, eu só posso definir funções dentro de módulos. Então, se eu quero criar uma função, primeiro eu definir um módulo. Então defmodule, def de define ou definir.
+
+[01:03] E como eu estou utilizando uma extensão, se eu der “Enter”, o Visual Studio Code já completa para mim. Mas eu vou fazer um “Ctrl + Z” para fazermos juntos. Eu vou chamar de MeuModulo e eu utilizo a palavra do, o que ela faz? Ela inicializa esse módulo, ela diz que dentro desse bloco, tudo que eu escrever faz parte do meu módulo.
+
+[01:22] Em Elixir não utilizamos chaves, não é assim que escrevemos, vamos fazer o do para iniciar um bloco e end para fechar esse bloco.
+
+[01:31] Então com o nosso módulo definido, eu posso criar minha função. E para criar uma função eu utilizo a palavra def. E agora vou utilizar o Visual Studio Code, então repara que ele já adiciona o do e o end e vou chamar def ola_mundo do.
+
+[01:46] O que eu vou fazer nesse módulo? Eu vou exibir olá, só isso. Então embaixo eu coloco IO.puts(“Olá”), só isso sem segredo. E com isso eu já tenho meu arquivo pronto para importarmos de alguma forma e começar a executar.
+
+[02:03] Então vamos lá, se eu tivesse no meu terminal, eu estou na pasta de “teste.exs” e se eu tivesse algum código sendo executado, eu poderia fazer elixir teste.exs e ele executaria o nosso script. Mas eu não estou executando nada, eu só estou definindo um módulo. Então eu posso importar esse módulo lá no iex, no meu terminal interativo.
+
+[02:25] Então como podemos fazer isso? Eu vou sair do terminal, porque eu não mostrei para vocês como sair, “Ctrl + C” e vou dar o “a”, que vai ser abortar a execução do iex. Então vou limpar a tela. E como eu carrego um arquivo no iex? Como eu executaria no Elixir, eu digito o nome desse arquivo. E ele já vai carregar, então ele define o nosso módulo, e partir de agora eu posso executar MeuModulo.ola_mundo.
+
+[02:53] Então repara que ele exibiu o “olá” e deu ok para nós, o retorno foi ok. Então vamos falar de alguns detalhes, mas antes eu quero alterar de “olá” para “olá mundo”. Eu preciso sair do iex e abri-lo de novo para executar essa função? Não preciso. Mas repara que se eu mudar para IO.puts(“Olá, mundo!”) salvar e simplesmente executar, ele ainda tem a versão antiga.
+
+[03:18] Então o que eu posso fazer é recarregar esse módulo. Eu posso fazer isso através da função R, então r(MeuModulo) vai ser recarregado.
+
+[03:26] E ele nos deu aviso falando que estamos definindo de novo esse módulo e eu digo para ele que é isso mesmo que eu quero. Então ele recarrega o módulo.
+
+[03:33] E agora se eu executar o nosso “Olá, mundo!” nós temos o “Olá, mundo!”, ou seja, nossa nova versão do código.
+
+[03:41] Claro que isso ainda não é o ideal, o ideal seria executarmos uma vez só, só que por enquanto estamos testando, por isso eu vou continuar utilizando o terminal interativo. Mais para frente, talvez em outros cursos, quem sabe, nós comecemos a compilar o nosso código, comecemos a gerar um executável.
+
+[03:56] Mas chega de falar, vamos entrar em detalhes sobre a sintaxe que podemos utilizar nas funções, algumas facilidades de módulos, mas tudo isso a partir do próximo vídeo.
+
+@@04
+Criando funções
+
+Neste vídeo, além de criarmos um módulo, já criamos nossa primeira função em Elixir que não recebe nenhum parâmetro.
+Qual a sintaxe para criar uma função chamada teste que não recebe nenhum parâmetro?
+
+def teste {
+    # corpo da função
+}
+ 
+Alternativa correta
+def teste do
+    # corpo da função
+end
+ 
+Alternativa correta! Repare que não informamos os parênteses como é comum em outras linguagens. Mas se quisermos, podemos informá-los, sem problema, ficando assim:
+def teste() do
+    # corpo da função
+endCOPIAR CÓDIGO
+Alternativa correta
+def teste
+    # corpo da função
+end
+
+@@05
+Mais de um módulo
+
+[00:00] Olá, pessoal. Boas-vindas de volta. Então vamos começar vendo alguns detalhes de módulos e funções. Primeiro, quando executamos no nosso terminal essa função, ela mostrou um “ok” no final. Vou executar de novo para você ver.
+[00:13] Então exibiu o “Olá, mundo!”, que é o que esperávamos e mostrou o retorno, que é o “ok”. Mas em nenhum momento nós definimos retorno para essa função. Em Elixir a última instrução de uma função sempre é retornada. Então no caso estamos retornando o que o puts nos retorna, que é o átomo :ok indicando que deu tudo certo, não tem nenhum problema.
+
+[00:34] Então o retorno de uma função é sempre o retorno da última instrução, sempre. Repara que não utilizamos ponto e virgula em Elixir não precisamos, e sempre as instruções são delimitadas pela quebra de linha.
+
+[00:50] Continuando, eu estou chamando o puts através do módulo IO, imagina que eu chame essa função muitas vezes ou que o nome do módulo seja muito grande, Meu.Modulo.Com.Nome.Grande, alguma coisa assim. Então ia ser bastante chato ficar digitando o nome desse módulo o tempo todo, em todos os lugares que eu chamo a função. Então, para ajudar um pouco, eu posso importar esse módulo, então eu posso chamar o import IO.
+
+[01:16] E o que isso vai fazer? Em qualquer função desse módulo, se eu for usar alguma função de IO eu posso não informar o IO, eu posso omitir o nome do módulo. Então vamos lá. Ao invés de continuar, de ficar trocando de janela, o que eu vou fazer? Eu já vou utilizar o terminal do nosso Visual Studio Code. Então eu vou executar o teste, vou carregar o teste e vou executar MeuModulo.ola_mundo e eu espero que tudo continue funcionando.
+
+[01:47] Tem o “Olá, mundo!” sendo exibido e o :ok sendo retornado sem nenhum segredo. Eu vou limpar e vamos continuar. Além de exibir, eu quero fazer uma inspeção, mostrar que eu estou entrando em uma função, eu exibo a mensagem e depois eu saio. Como eu posso fazer isso?
+
+[02:03] Vou definir uma nova função chamada inspect, então def inspect(parametro), e ela recebe um parâmetro, esse vai ser o nome. E eu quero executar um puts, então puts(“Começando inspeção”). Eu vou duplicar essa linha e informar que eu estou terminando a inspeção, então puts(“Terminando a inspeção”) e eu vou exibir nesse meio termo o parâmetro que eu recebi, então puts(parametro), simples assim.
+
+[02:39] Então sempre que eu executar o ola_mundo, na verdade, eu vou chamar um inspect e passando pro parâmetro o inspect(“Olá, mundo”).
+
+[02:49] Então repara que agora eu tenho duas funções, uma função chama a outra e eu já tenho um parâmetro sendo definido. Qual vai ser o retorno de “Olá, mundo”? Vai ser o que inspect retornar, porque essa é a última instrução. E o que inspect retorna? Ele retorna :ok, porque o puts retorna e a última instrução é puts. Vamos redefinir o nosso r(MeuModulo).
+
+[03:10] E quando eu tento redefinir, olha só o problema que recebemos? Eu estou tentando definir uma função inspect, mas essa função já foi importada, tanto de IO quanto de Kernel. Mas o sistema não está importando Kernel em nenhum lugar. Como eu falei, algumas funções padrão de Elixir são definidas no módulo Kernel e esse módulo é importado em todos os outros por padrão.
+
+[03:33] Então o que eu posso fazer? Eu posso dizer que de IO eu só estou definindo, só estou importando a função puts. Mas eu preciso passar mais uma informação. Além de informar o nome da função, eu preciso informar qual definição dessa função é. Pode ficar complexo, mas basicamente é quantos parâmetros essa função recebe, que nesse caso é 1, então import: IO, only: [puts: 1], o nome disso é arity ou aridade da função.
+
+[04:02] Podemos falar um pouco mais sobre isso no futuro, mas basicamente é um número de parâmetros que essa função tem. Porque em Elixir eu posso criar várias funções com o mesmo nome, mas os parâmetros diferentes. Então dessa forma eu sei qual função eu estou importando, quais das funções com nome puts eu estou importando.
+
+[04:20] Então isso já resolve um problema e se eu tentar importar, agora ele só está conflitando com o do Kernel.
+
+[04:27] Então o que eu posso fazer? Eu posso importar do Kernel exceto a função inspect, então import Kernel, except: (inspect: 1). Então quando eu salvo e tento redefinir.
+
+[04:51] E redefini. Agora quando eu chamo o “Olá, mundo”, eu mostro “Começando a inspeção”, “Olá, mundo”, “Terminando a inspeção”. Então o que está acontecendo? O que eu fiz com essas diretivas, que é o que chamamos. Eu estou importando do módulo IO somente a função puts que recebe um parâmetro. E eu estou importando tudo do módulo Kernel, exceto a função inspect, que recebe um parâmetro.
+
+[05:18] Então eu consigo informar, consigo dar mais detalhes do que eu vou fazer dentro de um módulo, dentro de uma importação, através desses parâmetros para diretiva. Então o import é uma diretiva que eu consigo utilizar nos meus módulos e eu posso informar se eu vou importar somente algumas funções, se eu vou importar todas com exceção de algumas funções.
+
+[05:39] Então já entramos em alguns conceitos de módulo, falamos sobre utilização de parâmetros, como sabemos o que uma função retorna, então no próximo vídeo voltamos com algumas outras diretivas que podemos utilizar.
+
+@@06
+Retorno de funções
+
+Neste vídeo nós aprendemos a importar módulos e informar quais funções queremos trazer ou não desses módulos. Mas nós também vimos como funciona o retorno de funções em Elixir.
+Como definir :ok como retorno de uma função teste em Elixir?
+
+def teste() do
+    return :ok
+end
+ 
+Alternativa correta
+def teste do
+    :ok
+end
+ 
+Alternativa correta! A última (no caso, única) instrução dessa função é o atom :ok. Sendo assim, ele será retornado. :-). Repare que neste caso nós não utilizamos os parênteses na definição da função.
+Alternativa correta
+def teste() do
+    :ok
+end
+ 
+Alternativa correta! A última (no caso, única) instrução dessa função é o atom :ok. Sendo assim, ele será retornado. :-). Repare que neste caso nós utilizamos os parênteses na definição da função.
+
+@@07
+Aliases
+
+[00:00] Olá, pessoal. Boas-vindas de volta. Então vamos começar a incrementar um pouco nosso código, vou até diminuir o nosso terminal. Então, já aprendemos como utilizar parâmetros, como importar módulos, entendemos o tipo de retorno, vamos criar um novo arquivo para brincarmos um pouco. Eu vou chamar esse arquivo de “math.exs”.
+[00:20] Eu vou definir um módulo, então defmodule MeuModulo.Math do e end no final. Eu vou definir dentro desse módulo uma função que eu vou chamar de soma def soma(parametro1, parametro2) do. Então já vimos como receber mais de um parâmetro, é só separá-los por vírgula.
+
+[00:49] Tudo que eu quero fazer é retornar a soma desses dois, então vou retornar parametro1 + parametro2. Então repara que com isso eu já estou retornando a soma deles dois.
+
+[00:58] Defini o meu módulo de matemática. O que eu quero fazer? No meu “Olá, mundo”, ao invés de inspecionar “Olá, mundo”, eu quero inspecionar inspect(MeuModulo.Math.soma(2, 2)), eu vou somar 2+2. É isso que eu quero fazer.
+
+[01:20] Então teoricamente eu tenho tudo que eu preciso para executar esse código. Então vou tentar redefinir o MeuModulo.
+
+[01:29] Repara que essa função que estamos utilizando não existe, ela não foi definida, eu não importei no iex. Então o que eu posso fazer, eu posso fazer um import_file “math.exs”.
+
+[01:42] Com isso o que ele fez? Ele leu aquele código e a nossa definição binária dele foi importada e agora ele está disponível no iex. Então se eu redefinir o módulo de novo, eu não tenho mais aquele aviso de que a função soma não existe.
+
+[01:57] Agora eu posso executar o MeuModulo.ola_mundo, ele vai começar a inspeção, executar aquela nossa soma e finalizar a inspeção.
+
+[02:08] Funcionando o nosso código. Mas imagina se eu utilizar mais de uma função aqui, mais de uma vez, ou mesmo que eu use uma vez só, ter que ficar escrevendo esse nome grande um de um módulo é chato. Então o que eu posso fazer? Posso fazer um alias, posso dar um apelido. Então eu posso fazer um alias MeuModulo.Math. E isso vai permitir que eu tire o MeuModulo de inspect(MeuModulo.Math.soma(2, 2)) ficando inspect(Math.soma(2, 2)).
+
+[02:32] Então se eu tivesse o alias MeuModulo.Com.Nome.Grande.Math eu ainda assim, fazendo o alias, poderia utilizar somente a última parte do nome do módulo. Então vou fazer o alias do alias MeuModulo.Math.
+
+[02:47] Então em todo lugar que eu vou fazer a referência a esse MeuModulo.Math eu posso utilizar somente o último nome que o Elixir vai se encontrar. Então vou recarregar MeuModulo.
+
+[02:58] Módulo redefinido, posso utilizar o “Olá, mundo” sem problema nenhum. Só que um detalhe, math é um nome comum, eu posso ter conflito, alguém fez um módulo math, eu o meu. Então se eu quiser, eu posso modificar o nome dele, então estou fazendo um alias desse meu módulo como MeuMath, então eu coloco depois de alias MeuModulo.Math, as: MeuMath, as significa “como” em inglês, ou posso manter em inglês e deixar MyMath. E no inspect eu posso utilizar como MyMath. Se eu recarrego esse módulo e executo, tudo continua funcionando.
+
+[03:37] Então o que vimos aqui? Vimos como utilizar, como receber mais de um parâmetro em uma função, agora estamos utilizando mais a fundo o retorno dessa função, estamos chamando uma função que definimos em módulo próprio fazendo o alias dele e colocando um nome específico. Se eu não informar esse as, é como se eu estivesse colocando as do último nome desse módulo.
+
+[04:05] Agora tem outro detalhe que às vezes o alias e o import não resolvem, precisamos explicitamente dizer que queremos executar esse pedaço de código. Então vamos ver quais casos são esses no próximo vídeo.
+
+@@08
+Require Macros
+
+[00:00] Olá, pessoal. Boas-vindas de volta. Então já aprendemos algumas diretivas, já vimos como fazer import, como fazer alias, ou seja, como mudar o nome. Agora eu vou criar uma nova função que exibe alguma mensagem, def exibe_se_eh_par(numero) do, ou seja, vou exibir se algum número é par ou não.
+[00:21] Então como podemos fazer isso? Vou fazer um puts, não preciso do IO porque eu importei, puts(“O número #{numero} é par? e eu exibo se é par ou não. E como eu vou exibir? Eu vou utilizar algo que é parecido com uma função, mas não é e você vai ver já, já. É lá do Integer, do módulo de inteiros. Então posso chamar #Integer.is_even(numero))”). Então, executei meu código, vamos tentar recarregar o meu módulo.
+
+[01:08] E agora temos outro erro, esse é o erro que eu esperava. Ele está informando que precisamos, antes de invocar a macro is_eve, precisamos fazer o required desse módulo inteiro. O que isso quer dizer? Tem muitas palavras que eu não entendi nada. Mas se eu tento executar MeuModulo.exibe_se_eh_par(1).
+
+[01:34] Ele não consegue executar aquela função, independente do número que eu passe. Repara que agora a mensagem fica um pouco mais clara. Quando ele está falando de macro, fazer o required inteiro, isso não estava fazendo sentido. Mas agora ele está informando que a função is_even não é definida ou é privada. Então o que ele está querendo dizer? A função is_even realmente não existe, ela não foi definida, porque is_even não é uma função, ela é o que chamamos em Elixir de macro.
+
+[02:07] Para quem é de C ou C++ pode ter uma semelhança, é uma forma de dizermos para o compilador gerar código para nós. Então, o Elixir tem algumas macros, podemos até ver um pouco de algumas depois, mas qual é o ponto neste caso? É que is_even não é uma função, então para eu conseguir utilizar, eu preciso explicitamente dizer que eu quero utilizar as macros de integer. E para isso podemos utilizar o require, o require Integer.
+
+[02:37] E se eu tentar recarregar esse meu módulo, ele já não exibe mais aquela mensagem. Se eu coloco MeuModulo.exibe_se_eh_par, número 2 é par? True, ele é par. O número 1 é par? False, ele não é par.
+
+[02:56] Então agora conseguimos utilizar as macros que estão definidas em integer. Então sempre que eu precisar de alguma macro que está em algum módulo, eu vou utilizar essa diretiva chamada require. Um detalhe, se eu fizer um import e eu tentar executar o is_even, vamos ver o que vai acontecer, vou recarregar e executar.
+
+[03:22] Repara que isso também funciona. Ou seja, se eu quiser executar uma macro, mas não quiser fazer o require e utilizar o nome completo, eu posso importar aquele módulo completo. Se eu importar e utilizar o nome completo também, colocar integer antes de is_even, isso continua funcionando.
+
+[03:48] Se eu quiser manter o integer, desde que eu tenha o import em cima, ele só vai me dar um aviso dizendo que esse import nunca está sendo usado, mas, na verdade, ele está sendo para importar o is_even. Então vamos recarregar.
+
+[03:59] E agora ele diz “import não utilizado de integer”. Então esse é um aviso que ele está dizendo que ele importou esse módulo, mas você não está o utilizando, sem utilizar o próprio nome, sem definir o próprio nome, sem escrever. Então dessa forma temos o aviso, mas continua funcionando.
+
+[04:15] Se eu quiser manter dessa forma, utilizando o nome do módulo ponto a macro e assim eu posso fazer o require, que é como vamos deixar só para utilizar todas as diretivas.
+
+[04:26] E agora para finalizar, temos 3 diretivas, a import faz com que não precisemos digitar o nome do módulo na hora de chamar alguma função dele, conseguimos fazer o import somente de algumas funções ou somente de algumas funções com exceções de algumas, conseguimos fazer o alias, ou seja, meio que renomear, dar algum apelido para algum módulo e conseguimos requerer algum módulo para reutilizar os macros dele.
+
+[04:51] E todas essas diretivas têm o que chamamos de escopo léxico. O que isso quer dizer? Se eu só utilizo essa macro dentro dessa função, eu posso muito bem colocar require Integer dentro dessa função. E agora em todas as outras funções, se eu tentar chamar esse integer.is_even, não vai funcionar. Então vou recarregar e exibir.
+
+[05:15] Tudo continua funcionando, sem aquele aviso, inclusive. Então todas essas diretivas têm escopo léxico, onde elas forem escritas, onde elas forem definidas, elas vão ser meio que presas ali dentro, elas vão ser acopladas àquele escopo. Então, se eu tiver um import IO dentro de uma função, dentro da outra eu não posso chamar o puts sem digitar o IO, por exemplo, então esse é um detalhe interessante.
+
+[05:43] Então com isso encerramos essas diretivas de módulos, falamos bastante de módulos e acabamos falando um pouco de funções também, afinal eles estão interligados. Agora vamos focar um pouco mais na parte de funções, vamos entender como definir funções usando outra sintaxe, como criar funções anônimas, enfim, vamos bater um papo legal sobre funções no próximo capítulo.
+
+@@9
+Para saber mais: Macros
+
+O Elixir possui uma forma de "ensinar" o compilador a escrever código. Essa funcionalidade é conhecida como Macro. Quem é de C e C++ deve estar familiarizado com o assunto.
+Neste vídeo nós vimos que para utilizar macros, precisamos fazer o require do módulo em questão.
+
+É válido citar que devido a macros ensinarem o compilador a gerar código, acabam sendo uma estrutura um pouco mais complexa do que simples funções, por isso, como a própria documentação diz, devemos escrever macros com responsabilidade. Apenas se realmente for necessário, vamos recorrer a escrita de nossas próprias macros.
+
+Neste treinamento nós não vamos falar sobre Macros, mas se você quiser conhecer sobre o assunto, pode conferir aqui:
+
+Macros
+
+https://elixir-lang.org/getting-started/meta/macros.html
+
+@@10
+Faça como eu fiz
+
+Chegou a hora de você seguir todos os passos realizados por mim durante esta aula. Caso já tenha feito, excelente. Se ainda não, é importante que você execute o que foi visto nos vídeos para poder continuar com a próxima aula.
+
+Continue com os seus estudos, e se houver dúvidas, não hesite em recorrer ao nosso fórum!
+
+@@11
+O que aprendemos?
+
+Nesta aula, aprendemos:
+Conhecemos os módulos do Elixir;
+Criamos nosso próprio módulo;
+Aprendemos a criar funções;
+Vimos as diretivas import, alias e require para trabalhar com módulos.
+
