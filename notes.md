@@ -302,3 +302,250 @@ Nesta aula, aprendemos:
 Aprendemos a criar variáveis e vimos os operadores matemáticos;
 Aprendemos sobre strings no Elixir;
 Conhecemos as listas do Elixir.
+
+##### 04/09/2023
+
+@03-Mais tipos
+
+@@01
+Mapas
+
+[00:00] Olá, pessoal! Boas-vindas de volta a mais um capítulo desse treinamento de Elixir. Já falamos bastante sobre a sintaxe básica da linguagem, começamos a entender sobre os tipos, então nesse capítulo vamos ver mais tipos de Elixir. Mas antes de continuar, quero trazer a atenção de vocês para dois detalhes do nosso ix, para o nosso terminal interativo.
+[00:19] O primeiro é: conforme vamos rodando comandos, um contador vai sendo incrementado. Então repara que eu já estou perto de digitar o 44º comando. Esse é um detalhe interessante. E como já estamos com a tela bem suja, cheia de outros comandos que eu rodei, se eu quiser limpar, assim como no terminal, eu posso digitar Clear e isso vai limpar para nós.
+
+[00:41] Mas continuando, vamos falar agora de outra estrutura de dados. Se quisermos mapear uma chave para algum valor, podemos utilizar o conceito de mapas. Várias linguagens possuem isso e Elixir não é diferente, também temos mapas.
+
+[01:00] Então se eu quiser criar um mapa onde eu estou mapeando um número para o seu nome, ou seja, um inteiro para uma string, eu posso utilizar essa sintaxe de percentual, então %{ 1 => “um”, 2 => “dois” } e o número 1 vai ser mapeado com esse operador para o nome 1 e com vírgula eu posso separar vários valores. Então dois vai ser mapeado para 2 e assim em diante.
+
+[01:20] Então repara que eu tenho um mapa, que eu vou chamar esse mapa de números, números = %{ 1 => “um”, 2 => “dois” }. Tenho esse mapa de números, se eu inspecioná-lo i números o que eu tenho é um mapa. E como eu acesso? Eu quero acessar em números qual é o valor de dois, eu consigo fazer utilizando os colchetes, números[2].
+
+[01:40] Então se eu quiser o valor de 1, eu tenho “um” e se eu pegar o valor de 3, eu tenho nulo, eu não tenho nada lá.
+
+[01:46] Então repara que no mapa eu consigo tentar acessar qualquer coisa sem nenhum problema. Então dessa forma conseguimos ter mapas de um valor, de uma chave para algum número. Essa chave pode ser qualquer coisa e esse valor também pode ser qualquer coisa.
+
+[02:03] Então vamos voltar na definição. Eu quero agora utilizar um nome e eu vou colocar isso com um algarismo romano. Então %{“um” => “I”, “dois” => “II”}.
+
+[02:18] Então repara que agora eu tenho a chave sendo uma string e o valor também sendo uma string e isso funciona sem problema nenhum. Se eu quisesse colocar que a chave é string e o número é um float, sem problema nenhum. Então repara que tanto a chave quanto o valor podem ser de qualquer tipo.
+
+[02:34] E se eu quiser, eu posso ter, por exemplo, uma lista, eu vou ter uma lista vazia e outra com o número dois, %{“um” => “[], “dois” => [2]}, sem problema nenhum. E se eu quiser adicionar uma lista, se uma lista for a chave. Por exemplo, %{[] =>[], [2] => [2]}, repara que eu consigo.
+
+[02:53] Então, se eu tentar pegar essa lista e acessar elementos elementos = %{[] =>[], [2] => [2]} eu vou pegar de elementos o número 2, elementos [[2]]. Repara que eu consigo acessar sem problema nenhum.
+
+[03:07] Então esse é um detalhe bastante poderoso dos mapas, eu consigo utilizar literalmente qualquer tipo com uma chave e essa chave pode ser mapeada para qualquer tipo, que vai ser o valor. Então basicamente o conceito de mapas é esse, mas temos outra estrutura de dados que também mapeia um valor, uma chave, para um valor, ou seja, um valor para outro.
+
+[03:29] Para isso precisamos conhecer outro tipo de dado, que eu já até utilizei, lembra que eu fiz isso :três lá atrás? Há alguns vídeos atrás? Vamos entender o que é esse tipo quando temos dois pontos e um nome qualquer no próximo vídeo.
+
+@@02
+Mapas vs Listas
+PRÓXIMA ATIVIDADE
+
+Vimos neste vídeo que podemos ter um mapeamento de um valor para outro no Elixir, gerando um conjunto de dados.
+Qual a principal diferença entre um mapa e uma lista?
+
+Uma lista tem um valor apontando para outro. Um mapa é apenas uma sequência de valores.
+ 
+Alternativa correta
+Um mapa tem um valor sendo mapeado (apontando) para outro. Uma lista é apenas uma sequência de valores.
+ 
+Alternativa correta! Um mapa mapeia chaves para valores, ou seja, através da chave conseguimos acessar o valor correspondente. Já uma lista não possui mapeamento nenhum. É apenas uma sequência de valores não relacionados. Para acessar um elemento, precisamos percorrer todos os anteriores.
+Alternativa correta
+Não há diferença. Por baixo dos panos é a mesma coisa.
+
+@@03
+Repetindo chaves
+PRÓXIMA ATIVIDADE
+
+Agora que já aprendemos sobre mapas, vamos ver um exemplo:
+%{"um" => 1, "dois" => 2, "um" => 3}COPIAR CÓDIGO
+Qual será o mapa resultante dessa expressão?
+
+%{"dois" => 2, "um" => 3}
+ 
+Alternativa correta! Ao usarmos chaves repetidas (2x a chave "um"), o valor é sobrescrito. Ou seja, criamos a chave "um" com o valor 1, mas depois alteramos esse valor para 3.
+Alternativa correta
+%{"um" => 1, "dois" => 2}
+ 
+Alternativa correta
+%{"um" => 1, "dois" => 2, "um" => 3}
+ 
+Alternativa errada! Não podemos repetir chaves.
+
+@@04
+Atoms
+
+[00:00] Olá, pessoal. Boas-vindas de volta. Agora vamos conhecer outro tipo de dado do Elixir, que é bastante importante, ela é muito utilizado, mas ele não existe em muitas outras linguagens, então às vezes acaba ficando difícil entender o conceito.
+[00:12] A teoria por trás é bastante simples, um valor como aquele que eu utilizei no último vídeo, que começa com dois pontos e tem um nome é o que chamamos em Elixir de atom ou átomo. E o que esse átomo tem como valor? Ele tem basicamente o seu nome como valor. Então se eu tentar exibir esse :três, por exemplo, IO.puts(:três).
+
+[00:38] O que vai ser exibido é o seu nome, três. Então basicamente, de novo, um átomo é uma variável, é algo, um valor, onde o seu nome é igual a seu valor. Então, eu posso criar quantos átomos eu quiser, posso criar quantas variáveis eu quiser do tipo átomo e eu não posso atribuir um valor diferente a ele, porque isso nem faria sentido. Como eu disse, um átomo é algo que o nome dessa variável é o mesmo que o seu valor.
+
+[01:04] Então até temos alguns átomos já criados por padrão, o :true, isso em Elixir é um átomo, e podemos acessar esse átomo com os dois pontos ou sem, que vai dar no mesmo.
+
+[01:18] Mesma coisa para :false e para nulo, que é o valor :nil. Por isso eu disse que átomos são tão importantes, mas não só por isso, é muito comum utilizarmos átomos com outras estruturas.
+
+[01:31] Por exemplo, eu falei que existia outra estrutura que permitia mapear um valor para algum outro valor, então uma chave para um valor. E conseguimos isso através de keyword_lists. O que é isso? Conseguimos ter uma lista, então isso vai estar entre colchetes, keyword_list = [] e eu vou ter um valor sendo mapeado para outro valor, então uma chave para um valor, mas diferente dos mapas, essa chave precisa ser átomo.
+
+[02:00] Então eu posso ter algo informando que keyword_list = [ok, true, :erro, false]. Só que essa sintaxe não vai funcionar, o que eu vou nessa keyword_list é só uma lista com vários valores, se eu quiser mapear, eu vou utilizar outra estrutura de dados chamada dupla. Então repara nesse detalhe, keyword_list = [{>ok, true}, {:erro, false}].
+
+[02:25] Se eu tenho em uma lista várias tuplas, onde o primeiro elemento é sempre um átomo e o segundo elemento é qualquer outro valor, eu tenho uma keyword_list, eu tenho uma lista de palavra-chave, que eu consigo dessa keyword_list acessar os valores, então se eu tentar acessar o valor de ok, por exemplo, keyword[:ok], eu tenho que é true. E se eu tentar acessar o valor de erro, keyword_list[:erro], eu vou ter o valor falso.
+
+[02:49] Lembrando que o valor pode ser qualquer coisa, mas a chave precisa ser sempre um átomo, um atom. Alguns detalhes a mais, vamos voltar para atom, que eu já entrei em outra estrutura de dados, vamos falar mais sobre tuplas, já, já.
+
+[03:03] Voltando para atoms, eles são imutáveis, uma vez criado, você não consegue alterá-lo ou redefinir, algo do tipo. O que parece óbvio, mas é importante citarmos. Porque, por exemplo, ok sempre vai ser igual a ok, :ok == :ok. E nenhum átomo diferente vai ser igual a outro. Eu sei que de novo parece óbvio o que eu estou falando, mas o que eu quero dizer é que isso aqui :ok == :erro é impossível, sempre vai ser falso.
+
+[03:27] Então átomos, de novo, são valores, são variáveis, onde o nome já é seu valor, eles são imutáveis, não é possível mudar por motivos óbvios, eu não consigo fazer :ok = “algo diferente”, isso não é permitido.
+
+[03:41] E outro detalhe é que eu posso ter um átomo com espaço no seu nome. Então basta eu colocar entre aspas, :”isso é um átomo”.
+
+[03:51] E eu tenho um átomo criado com espaços no seu nome, sem problema nenhum. Se eu fizer um IO.puts(:”isso é um átomo”), ele vai nos exibir essa string sem problema nenhum.
+
+[04:05] Mais uma vez, recapitulando, o que é um átomo? É uma variável em que o seu nome é o seu valor e ela é imutável, uma vez criada você não consegue mais alterá-la. E você não precisa definir um átomo antes de utilizar, você já pode, por exemplo, se eu estou retornando alguma função e vou informar que o retorno deu ok, eu não preciso definir esse átomo para depois utilizar, eu já posso só retornar ok.
+
+[04:26] E já vimos esse ok mais de uma vez, repara que o nosso puts retorna um átomo ok. Então isso é bastante interessante. Agora vamos voltar nossas atenções para essa outra definição, essa outra estrutura de dados que eu utilizei, que são tuplas. Então o próximo vídeo vai ser específico sobre tuplas.
+
+@@05
+Para saber mais: Keyword lists
+PRÓXIMA ATIVIDADE
+
+Tupla é um dos tipos de dados mais utilizados em Elixir. Juntando o conceito de tuplas (um conjunto de dados relacionados) com atoms, temos as keyword lists. Esse tipo de dados é muito parecido com mapas.
+Um detalhe interessante é que podemos simplificar a definição de keyword lists da seguinte forma:
+
+keyword_list = [um: 1, dois: 2, tres: 3]COPIAR CÓDIGO
+Desta forma, cada "chave" é criada como um atom automaticamente, e mapeado para seus valores. A definição acima é idêntica à seguinte:
+
+keyword_list = [{:um, 1}, {:dois, 2}, {:tres, 3}]COPIAR CÓDIGO
+Tanto é que a seguinte expressão retorna true (verdadeiro):
+
+[um: 1, dois: 2, tres: 3] == [{:um, 1}, {:dois, 2}, {:tres, 3}]COPIAR CÓDIGO
+Se quiser saber mais sobre keyword lists:
+
+Keyword lists
+
+https://elixir-lang.org/getting-started/keywords-and-maps.html#keyword-lists
+
+@@06
+Mapas vs Keyword lists
+PRÓXIMA ATIVIDADE
+
+Vimos nesse vídeo que temos acesso a uma estrutura de dados muito semelhante aos mapas quando usamos atoms: Keyword lists.
+Qual a diferença entre keyword lists e mapas?
+
+Em keyword lists, qualquer tipo de dado pode ser a chave. Em mapas, as chaves precisam ser atoms.
+ 
+Alternativa correta
+São sinônimos. A única diferença é na sintaxe.
+ 
+Alternativa correta
+Em mapas, qualquer tipo de dado pode ser a chave. Em keyword lists, as chaves precisam ser atoms.
+ 
+Alternativa correta! Além disso, a ordem em que definimos as chaves de um mapa é ignorada pelo elixir na hora de armazená-lo. Via de regra o Elixir vai reordenar nossas chaves. Já em keyword lists, a ordem da definição das chaves é mantida. É apenas um detalhe. :-)
+
+@@07
+Tuplas
+
+[00:00] Olá, pessoal. Boas-vindas de volta. E o último vídeo pode ter ficado um pouco confuso, porque eu falei de várias estruturas diferentes. Então vamos recapitular.
+[00:09] O ponto principal do último vídeo era falar sobre átomos e a partir de átomos conseguimos criar outra estrutura que é keyword_list, que é a lista de palavras-chave. Que é como se fosse um mapa, mas a chave precisa ser um átomo. Então conseguimos uma sintaxe um pouco mais simplificada, que no final das contas se assemelha muito com mapas.
+
+[00:29] Só para criarmos keyword_lists, além de conhecer átomos, também precisamos conhecer tuplas. Então vamos falar de tuplas agora.
+
+[00:38] E vamos criar nossa primeira tupla primeira_tupla = {}. E o que é uma tupla? É um conjunto de poucos dados. Então eu posso ter aqui os valores, como representar o número 1, então eu vou ter primeira_tupla = {“um”, 1, 1.0, “I”}. Eu tenho várias formas de representar o número 1.
+
+[00:55] Isso é uma tupla. E para acessar algum elemento de uma tupla, eu posso utilizar a função elem:, de elemento. Então vou acessar da primeira tupla o elemento de índice 0, que é o “um”, então elem(primeira_tupla, 0).
+
+[01:08] Se eu quiser acessar o float, que é o terceiro elemento, eu coloco o valor 2, porque começa no 0, então o primeiro elemento é 0, o segundo elemento é 1, e o terceiro elemento é 2.
+
+[01:18] Então dessa forma eu consigo acessar elementos de tuplas. E o que mais podemos fazer? Para que normalmente utilizamos o tupla? Para representar um conjunto de dados que faça sentido andar junto sempre.
+
+[01:30] Por exemplo, quando vamos ler um arquivo, queremos informar se deu tudo certo ou se deu erro, caso tenha dado certo queremos informar o conteúdo desse arquivo, caso tenha dado errado, queremos informar o motivo de ter dado errado. O arquivo não existe, não temos permissão, acabou o espaço de disco, algo assim.
+
+[01:46] Então para representar esse conjunto de dados eu posso utilizar uma tupla, onde eu tenho o resultado se deu certo ou não, e tenho o conteúdo, a mensagem ou o valor desse arquivo. Então é muito comum termos esse tipo de dado, { :ok, “Conteúdo do arquivo”} sendo retornado quando vamos ler o arquivo.
+
+[02:05] É muito comum termos isso. Ou seja, dados que são diretamente relacionados podem ser feitos com tuplas. Se eu quiser, por exemplo, criar uma variável Vinicius que tenha meus dados, eu posso ter o meu nome, que é Vinícius Dias, eu posso ter a minha idade, que é 23 anos, então vinicius = {“Vinicius Dias”, 23}.
+
+[02:22] Então dessa forma eu tenho um conjunto de dados que são relacionados, se eu quiser acessar nome_do_vinicius, eu posso pegar o elemento da tupla Vinicius no índice 0, então nome_do_vinicius = elem(vinicius, 0).
+
+[02:36] E se eu quiser pegar a idade do Vinicius, também está na tupla, então idade_do_vinicius = elem(vinicius, 1).
+
+[02:47] Então tuplas, para finalizar, são uma forma de agruparmos dados que fazem sentido estarem juntos. É um pouco diferente de mapa, não damos um nome para esse valor, esses valores são numericamente indexados, ou seja, o primeiro elemento tem o índice da chave, o segundo elemento tem chave 1 e assim por diante.
+
+[03:08] Então tuplas são utilizadas para esse propósito e através de tuplas, átomos e lista, temos aquela outra estrutura de dados, que talvez agora tenha ficado um pouco mais claro, que são as keyword_list.
+
+[03:19] Então já falamos um monte de estrutura de dados, vamos lembrar: temos as listas ligadas, temos os mapas, temos os átomos e utilizando tuplas com átomos podemos ter as keyword_lists.
+
+[03:32] Então já vimos um monte de estrutura de dados, agora vamos respirar um pouco, vamos parar de ver estruturas novas e conversar um pouco sobre um tema que eu já citei e que o Elixir utiliza muito, que é o conceito de imutabilidade. Só que isso vamos falar no próximo vídeo.
+
+@@08
+Listas vs Tuplas
+PRÓXIMA ATIVIDADE
+
+Vimos neste vídeo outra estrutura de dados que armazena um conjunto de valores: Tuplas. Normalmente esta estrutura é usada para armazenar elementos relacionados, mas na prática, nada nos impede de usar uma lista para isso.
+Sendo assim, qual a diferença entre listas e tuplas, segundo o que vimos no vídeo?
+
+É possível acessar um elemento de uma tupla diretamente, através da função elem.
+ 
+Alternativa correta! Valores em Tuplas são armazenados sequencialmente na memória, da mesma forma como temos vetores em outras linguagens. Sendo assim, acessar algum dos elementos no meio da tupla é uma operação rápida. Agora adicionar valores na tupla é um processo mais custoso, já que precisamos criar uma nova tupla para isso. Neste ponto as listas são mais rápidas. Para saber quando usar cada tipo: Lists or tuples?
+Alternativa correta
+É possível acessar um elemento de uma lista diretamente, através da função elem.
+ 
+Alternativa correta
+Não há diferença. São sinônimos. Apenas a sintaxe é diferente.
+
+https://elixir-lang.org/getting-started/basic-types.html#lists-or-tuples
+
+@@09
+Imutabilidade
+
+[00:00] Olá, pessoal. Boas-vindas de volta. Então vamos falar de um conceito que é muito importante em qualquer linguagem de programação funcional e é o caso de Elixir também. Esse conceito é o de imutabilidade.
+[00:11] Então como eu disse, isso é muito importante na programação funcional em si, esse conceito de imutabilidade existe em praticamente todas as linguagens que trabalham com paradigma funcional, mas cada linguagem tem algumas especificidades. Então vou falar um pouco de como Elixir trabalha com imutabilidade.
+
+[00:27] Para começar, vamos criar uma lista de linguagem de programação, claro, vamos ter Elixir, PHP e JavaScript, então languages = [“Elixir”, “PHP”, “JS”].
+
+[00:35] Criada essa lista, o que eu quero fazer? Eu quero adicionar no início dessa lista um novo elemento, quero adicionar Java. Então List.insert_at, então repara que estou aprendendo uma nova função, eu poderia utilizar aquele operador de cons, mas eu quero aprender uma nova função. Então languages eu vou adicionar 0, ou seja, vou adicionar na primeira posição o valor Java, então list.insert_at(languages, 0, “Java”).
+
+[00:58] Retorna para nós uma nova lista. Então essa lista não foi armazenada na memória em alguma variável. Repara que se eu vier em languages, eu continuo com o meu valor original.
+
+[01:11] Então todas as funções que executamos não alteram os valores dos parâmetros. Isso é possível em qualquer linguagem. Então vamos ver onde que linguagens funcionais, como é o caso de Elixir, difere de linguagens imperativas. Se eu fizer essa inserção de list.insert_at(languages, 0, “Java”) e armazenar isso em languages, ou seja, nessa variável.
+
+[01:32] Se estivermos falando, por exemplo, de Haskell, que é outra linguagem funcional, isso não é permitido, mas em Elixir isso funciona sem problema. Então em languages eu tenho essa nova lista.
+
+[01:41] E se você vem de uma linguagem imperativa, isso não é nenhuma surpresa, é como normalmente funciona. Mas na maioria das outras linguagens, na maioria das linguagens imperativas, o que ia acontecer é que uma nova lista vai ser criada, totalmente criada, então esses valores originais de “Elixir”, “PHP”, “JS”, são meio que copiados para um novo endereço de memória.
+
+[02:00] Já com o Elixir, ele não faz isso, essa lista original continua existindo sem ser alterada na memória, ela está no espaço que ela foi criada ela continua existindo. O que aconteceu agora com essa função foi que esse novo elemento “Java”, tem agora um ponteiro para essa lista. Então essa lista continua em memória, mas agora temos uma nova cabeça dela, esse novo elemento tem um ponteiro para a nossa lista antiga.
+
+[02:26] Então esse é o conceito de imutabilidade um pouco mais por baixo dos panos, só que vamos esquecer um pouco a estrutura de dados e vamos falar de inteiros, por exemplo. Eu tenho contador = 1. Em Haskell não poderia fazer algo como contador = contador + 1. Porém, em Elixir eu consigo, sem problema nenhum, eu consigo alterar o valor de uma variável.
+
+[02:48] Mas se estamos falando de imutabilidade, como eu estou alterando o valor de uma variável? Na verdade, contador agora, quando eu crio uma variável, um espaço de memória é reservado. Eu não peguei esse espaço de memória e alterei o valor. O que Elixir está fazendo é criando um novo espaço de memória e atribuindo esse novo valor 2 nesse novo endereço de memória.
+
+[03:10] Então o espaço onde tinha o valor 1 agora não tem mais nenhuma variável apontando para ele, então em algum momento o garbage collector, o coletor de lixo da Erlang vai passar nesse endereço de memória e liberar. Então não temos desperdício de memória e não temos alterações de memória também.
+
+[03:27] E por que Elixir e várias outras linguagens funcionais utilizam dessa abordagem? Porque se vamos utilizar da programação paralela ou de computação distribuída, eu vou ter vários pontos do código manipulando a mesma variável possivelmente. Então imagina que essa variável languages está sendo manipulada em duas threads diferentes, em dois núcleos diferentes do meu processador.
+
+[03:52] Eu vou ter a certeza, vou ter a segurança de que quando eu pegar de volta aquele endereço de memória não vai ter sido alterado, ou seja, minha variável languages vai continuar com o mesmo valor. E que o endereço de memória para onde ela aponta também não vai ser alterado. E é por isso que o Elixir simplesmente pega o elemento “Java” e aponta para a lista original, porque sabemos que nesse endereço de memória nunca vai acontecer alguma alteração.
+
+[04:18] Então temos uma eficiência maior no uso de memória, porque temos essa certeza, a Erlang consegue fazer algumas otimizações, e temos segurança em computação paralela, porque eu sei que em nenhum momento o valor que está em determinado endereço de memória vai ser alterado.
+
+[04:36] Então eu posso passar sem medo as variáveis para threads diferentes sem desperdiçar memória, fazendo cópia e sem ter a incerteza se o que eu passei por parâmetro vai ser alterado por algum motivo, não vai.
+
+[04:48] Então eu entrei um pouco mais debaixo dos panos, falei da Erlang, que era a máquina virtual onde o Elixir roda, mas só para entendermos e ter isso fixado, que quando eu estou alterando o valor de uma variável, não estou alterando o valor em memória, estou criando um novo espaço de memória e esse novo valor será criado lá.
+
+[05:06] Então em Elixir eu nunca altero uma variável, eu sempre crio novas variáveis. Nesse caso é o mesmo nome, mas apontando para um novo endereço de memória. Então essa é a ideia de imutabilidade.
+
+[05:18] Mas, por enquanto, eu executei funções, mexi um pouco, mas não criei minhas próprias funções. Em qualquer linguagem decente podemos precisar agrupar blocos de código. Então vamos começar a entender como podemos agrupar código utilizando Elixir no próximo capítulo.
+
+@@10
+Faça como eu fiz
+PRÓXIMA ATIVIDADE
+
+Chegou a hora de você seguir todos os passos realizados por mim durante esta aula. Caso já tenha feito, excelente. Se ainda não, é importante que você execute o que foi visto nos vídeos para poder continuar com a próxima aula.
+
+Continue com os seus estudos, e se houver dúvidas, não hesite em recorrer ao nosso fórum!
+
+@@11
+O que aprendemos?
+PRÓXIMA ATIVIDADE
+
+Nesta aula, aprendemos:
+Falamos sobre Mapas;
+Conhecemos o tipo de dados Atom;
+Aprendemos a usar tuplas;
+Conhecemos keyword lists;
+Aprendemos sobre imutabilidade no Elixir.
