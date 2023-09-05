@@ -786,3 +786,226 @@ Criamos nosso próprio módulo;
 Aprendemos a criar funções;
 Vimos as diretivas import, alias e require para trabalhar com módulos.
 
+#### 05/09/2023
+
+@05-Funções e pattern matching
+
+@@01
+Projeto da aula anterior
+PRÓXIMA ATIVIDADE
+
+Caso queira, você pode baixar aqui o projeto do curso no ponto em que paramos na aula anterior.
+
+https://github.com/alura-cursos/2310-elixir/archive/refs/tags/aula-4.zip
+
+@@02
+Pattern Matching
+
+[00:00] Olá, pessoal. Boas-vindas de volta a mais um capítulo desse treinamento em que estamos começando a conhecer o Elixir. E já vimos bastante coisa da sintaxe básica, estamos começando a entender como os blocos se encaixam, mas tem um detalhe que eu já até citei o nome e é muito importante para linguagens funcionais, inclusive o Elixir, só que ainda não entendemos bem a fundo como funciona, que é o tal do pattern matching. Então vamos entender nesse vídeo o básico do pattern matching.
+[00:26] Eu vou super simplificar o conceito, para entendermos o básico dele, o que significa, mas isso vai parecer muito mais útil mais para frente, conforme vamos estudando mais sobre o Elixir e aplicando em casos mais reais. Por enquanto as coisas podem ficar um pouco abstratas, mas de novo, vou tentar super simplificar algumas coisas para ficarem mais simples e tentar mostrar alguns exemplos para começar a fazer sentido. Repetindo, isso vai fazer mais sentido no futuro.
+
+[00:54] Então eu não vou escrever código no Visual Studio Code, eu vou abrir o meu terminal interativo, o meu iex. Então vamos nessa. Para começar com pattern matching, eu vou criar uma nova variável chamada X, tendo o valor 1, x = 1.
+
+[01:07] Isso na maioria das linguagens lemos como x recebe o valor de 1. Mas em Elixir esse sinal de igual, “=”, não significa recebe, ele não é um operador de atribuição, ele é o operador de match, ele é o que faz o casamento entre duas expressões. Só que tem um detalhe de sintaxe de Elixir que se a expressão do lado esquerdo for uma variável e ela não existir, esse casamento acontece através dessa criação dessa variável.
+
+[01:36] Ficou super complexo. Então vamos com calma. Repara que 1 = x em várias linguagens não é possível, em muitas linguagens, principalmente as imperativas, isso não é possível, só que quando eu executo em Elixir, funciona perfeitamente. Porque o que ele está fazendo por baixo dos panos é tentando fazer um match, um casamento entre essa expressão x = 1 e a expressão 1 = x. E por baixo dos panos ele vai tentar fazer o casamento de 1 com 1, porque o valor de x é 1. t [02:05] Então isso vai dar certo e vai retornar o valor dessa expressão que casou, que no caso é 1. Só que tem dois detalhes, vamos lá. Em Elixir eu poderia fazer o que é conhecido como rebound de variável, que é pegar essa variável e fazer ela apontar para um outro endereço de memória, já conversamos sobre isso e sabemos que isso e possível. Só que se eu quiser fazer o pattern matching utilizando essa sintaxe x = 2, ou seja, uma variável do lado esquerdo e algum valor do lado direito, eu preciso utilizar um outro operador, que é o operador de pin, o acento circunflexo (^).
+
+[02:40] O que ele faz? Ele meio que trava essa variável informando que o que eu quero fazer não é reatribuir o endereço dessa variável, o que eu quero fazer é o pattern matching. Então nesse caso vamos ter um match error, ou seja, não vamos ter o match dessas duas expressões.
+
+[02:57] E teríamos o mesmo resultado se fizéssemos 2 = x. Então vamos recapitular até aqui. Esse sinal de igual é, na verdade, o operador de match, o operador de casamento entre expressões. Mas se o que está do lado esquerdo é uma variável, o Elixir faz o match de outra forma e não só verificando se as duas expressões batem, se elas são equivalentes. O que ele faz é adicionar nessa variável, que está do lado esquerdo, o endereço de memória que contenha, onde exista esse valor.
+
+[03:27] Então podemos chamar isso de sintax sugar e por baixo dos panos, o que realmente acontece é o pattern matching. Então eu sei que eu posso ter complicado um pouco as coisas, mas fica comigo que as coisas vão começar a fazer mais sentido.
+
+[03:41] Por quê? Eu não posso fazer pattern matching somente em variáveis simples, ou somente em variáveis, eu posso fazer pattern matching como já vimos, em dois valores e se eu fizer em dois valores diferentes eu tenho de novo um match error, um erro de match, um erro de casamento. Essas duas expressões não casam, não são equivalentes.
+
+[03:59] E se estamos falando de equivalência entre expressões, entre valores, talvez, podemos ter valores ou expressões um pouco mais complexos. Talvez eu tenha falado na aula de tuplas que existe, que é muito comum, ou na aula de átomos, não lembro mais, que é muito comum um tipo de retorno informando se um resultado foi ok ou teve erro e o segundo elemento dessa tupla é o conteúdo em si, é o que vai ser retornado.
+
+[04:26] Então vou mostrar um exemplo para vocês. Quando utilizamos uma função que lê um arquivo, por exemplo, a File.read, o que ela faz? Ela busca esse arquivo e tentar ler. Deu certo, ela vai retornar uma tupla com o primeiro elemento sendo ok e o segundo elemento sendo o conteúdo desse arquivo. Em caso de erro, o primeiro elemento é o átomo error e o segundo elemento é geralmente também um átomo informando qual erro aconteceu.
+
+[04:53] Então vamos entender como podemos utilizar pattern matching para tirar proveito dessa forma de retorno. Então imagina que eu queira criar uma variável conteúdo se a leitura desse arquivo funcionar. Se tiver algum erro na leitura desse arquivo, eu não quero criar essa variável conteúdo, pode me dar um erro. Então o que eu posso fazer? Eu posso informar que eu tenho uma tupla com ok e uma variável conteúdo. E com isso eu vou fazer o match com o retorno de file.read de um arquivo que não existe, {:ok, conteudo} = File.read(“teste”).
+
+[05:22] Então o que vai acontecer? Esse File.read vai retornar uma tupla onde o primeiro elemento é erro e o segundo elemento é algum átomo informando o motivo de erro. Então ele vai nos dar um match error e essa variável conteudo não vai ser criada. Por quê? Essa tupla que o File.read retorna File.read(“teste”) vai ser comparada com essa tupla {:ok, conteúdo}. Então primeiro ele vai ver que existe um casamento entre o átomo ok e o átomo error, o átomo de erro? Não, não tem um casamento, então é um erro de casamento. E é exatamente isso que acontece.
+
+[05:57] Temos um match error e não é possível casar o que está do lado esquerdo com o valor que o File.read nos retornou. Se eu quisesse pegar somente o cenário de erro, eu poderia fazer {:error, atom_de_erro}. Então o que eu estou fazendo? Estou fazendo um pattern matching do átomo error com uma nova variável atom_de_erro. Então o que isso quer dizer? Se File.read(“teste”) retornar uma tupla onde o primeiro elemento é o átomo Error, vamos ter o pattern matching e a nossa segunda variável, atom_de_erro, vai ter o valor do segundo elemento que o File.read retornar.
+
+[06:42] Então quando eu executo eu tenho a expressão sendo retornada com sucesso e o atom_de_erro vai conter o erro que aconteceu, que é enoent, que é no entry, ou seja, não existe essa entrada no sistema de arquivos. Simplificando esse termo difícil, o arquivo não existe.
+
+[06:59] Então repara que podemos utilizar pattern matching para cenários mais complexos e interessantes. Um outro exemplo é: imagina que eu tenho uma lista, tenho [1, 2, 3]. Eu quero pegar a cabeça dessa lista, que no meu caso é o número 1, e a cauda dessa lista, que é a lista 2 e 3. Eu vou criar a variável, para não precisar ficar criando toda hora, então lista = [1, 2, 3].
+
+[07:21] Então eu posso usar a função hd, que pega o head, posso pegar o hd(lista) para pegar a cabeça e o tl(lista) para pegar a cauda.
+
+[07:32] Mas e se eu já quiser criar essas duas variáveis ao mesmo tempo, eu posso pegar a minha cabeça, aquele operador que já vimos de cons, que pega a cabeça e a cauda e informar que eu vou querer a cauda, então [cabeca | cauda] = lista. Estou fazendo o match com a lista. Então o que vai acontecer?
+
+[08:00] Deu match, então ele nos retornou a lista, agora a nossa variável cabeça tem a cabeça dessa lista, que é o primeiro elemento e a nossa cauda, que é o 2 e 3.
+
+[08:13] Então repara que podemos fazer pattern matching com vários valores, com várias expressões. Então vamos continuar. Onde isso poderia ser útil também?
+
+[08:31] Imagina que eu tenha essa lista 1, 2, 3, e lembrando que o nosso x é 1. Então eu quero criar a variável A e a variável C, a partir dessa lista, então [a, , c] = lista, só que eu só quero criar se o segundo elemento dessa lista for o número 1, [a, 1, c] = lista eu posso colocar o número 1 entre A e C e temos um match error.
+
+[08:44] Porque o segundo elemento não é 1, é 2, então se eu colocar o 2 entre A e C vai funcionar. Mas eu quero praticar mais uma vez com o nosso pin operator, [a, ^x, c] = lista
+
+[08:53] E repara que temos exatamente o mesmo resultado. Então o pin operator começa a fazer um pouco de sentido. Se eu vou utilizar uma variável em um local onde via de regra ela seria redefinida, podemos utilizar o pin para fazer o pattern matching. Agora para eu conseguir criar as variáveis A e C, eu posso fazer o match corretamente, essas duas expressões vão casar, agora o A tem valor 1 e o C tem valor 3.
+
+[09:16] Então começamos a ver um pouco do poder do pattern matching e para finalizar, se eu quisesse criar as variáveis A e C, independente do que está aqui, só quero ignorar essa posição, eu poderia criar uma variável de mentira, mas existe uma sintaxe que já informa para o Elixir que ele quer simplesmente ignorar, que não precisa criar uma variável.
+
+[09:37] Então eu posso fazer [a, _, c] = lista, eu utilizo o underline para ignorar. Agora eu tenho A sendo definido como 1, C sendo definido como 3 e eu não tenho a variável underline, porque isso representa um valor a ser ignorado em um padrão, em um pattern e não pode ser utilizado em expressões.
+
+[09:59] Então repara que através do underline eu posso ignorar um valor, não preciso armazenar em memória e consigo fazer o meu pattern matching.
+
+[10:07] Enfim, já falei bastante, aplicamos alguns exemplos, agora vamos entender um pouco, já que estávamos falando de funções e módulos, agora que já estamos com pattern matching fervendo na nossa cabeça, eu vou deixar um “Para saber mais” com uma referência para documentação, falando mais sobre pattern matching, só que vamos voltar a falar de funções. Vamos falar um pouco mais de detalhes de sintaxe, como podemos definir funções de outras formas. Te espero no próximo vídeo.
+
+@@03
+Casando padrões
+PRÓXIMA ATIVIDADE
+
+Vimos neste vídeo o que é o famoso Pattern Matching do Elixir. Ele faz o casamento de padrões e expressões, permitindo que nós criemos variáveis, façamos verificações e criemos estruturas mais complexas que vamos ver no futuro. Levando em consideração o seguinte código:
+{a, b, c} = {:hello, "world"}COPIAR CÓDIGO
+O que acontece ao executar o código acima?
+
+As variáveis a e b serão criadas, mas a c não.
+ 
+Alternativa correta
+Vamos ter um MatchError pois as 2 expressões não "casam".
+ 
+Alternativa correta! Se tivéssemos um terceiro valor na tupla (a direita do =), teríamos as 3 variáveis antes do = sendo criadas. Essa é uma das possibilidades do pattern matching.
+Alternativa correta
+As variáveis a, b e c serão criadas, com c sendo :nil.
+
+@@04
+Detalhes de Sintaxe
+
+[00:00] Olá, pessoal. Boas-vindas de volta. Então já entendemos um pouco de como funciona pattern matching, inclusive eu esqueci de mencionar algumas das funcionalidades do pattern matching, algumas outras linguagens possuem com outro nome, com argument destructuring, com variable destruturing, array destructuring, ou seja, desestruturação de valores. Então talvez na sua linguagem você conheça algo parecido com o que vimos com pattern matching.
+[00:2] Só que pattern matching é bastante poderoso, como vamos ver mais no futuro. Então não é somente destructuring, acho que vale a pena citar.
+
+[00:35] Mas vamos lá, como eu disse, vamos falar um pouco sobre detalhes de sintaxe. O que acontece? Uma função em Elixir é um cidadão de primeira classe, como costumamos falar. Uma função pode ser atribuída por parâmetro, atribuída a uma variável, passada por parâmetro, ser retornada em uma outra função. Então, basicamente, uma função é um tipo como qualquer outro. Podemos fazer o que quisermos com ela.
+
+[01:00] E depois podemos até brincar um pouco mais, só que o meu ponto com isso é que funções são tão importantes que temos alguns detalhes de sintaxe interessantes quando falamos de Elixir.
+
+[01:11] Então, por exemplo, nós temos uma função e essa função é muito simples, ela tem uma instrução e já retorna essa instrução. Então quando temos esse cenários, podemos fazer o seguinte, ao invés de ter o do, o corpo dela e o end, eu posso colocar tudo na mesma linha, só utilizar a vírgula, dois pontos no do e ter o valor que vai ser retornado.
+
+[01:36] Com isso salvo, já temos uma nova função sendo criada. Então eu vou no meu terminal interativo e carregar o iex “math.exs”.
+
+[01:49] Repara que ele não deu erro de compilação e eu posso rodar MeuModulo.Math.soma(2, 3) e ele vai me dar 5, sem nenhum erro.
+
+[01:59] Então repara que a minha função já foi definida de outra forma, ela foi definida com uma função curta, vamos dizer assim. Agora vamos continuar.
+
+[02:12] Outro detalhe que é importante de citar. Eu comentei que precisamos criar um módulo e nesse módulo criamos funções. E se eu tentar criar uma função fora de algum módulo? Vamos ver o que acontece. Então multiplica(param1, param2), do: param1 * param2. Tendo isso, o que eu espero que aconteça? Que essa função “multiplica” exista em qualquer lugar, em um módulo global ou alguma coisa assim. Mas será que é isso que acontece? Vou abrir o meu terminal interativo de novo.
+
+[02:49] Já temos um erro, o meu terminal interativo nem abre, porque temos um erro de sintaxe. O que acontece? Não conseguimos invocar o def fora de algum módulo. Porque def não é uma palavra reservado ou algo assim, ele é o que chamamos de macro. Então ele é uma macro que gera funções para nós e eu não posso utilizar macros fora de algum módulo, que é exatamente o que está escrito, eu não posso invocar o def fora de algum módulo.
+
+[03:18] Então todas as funções que eu vá criar precisam estar dentro de um módulo. E agora outro detalhe. Talvez eu queira ter alguma função que eu só use dentro do módulo, é uma função que eu uso para organizar o meu código, ela não precisa ser exposta, por exemplo, o meu inspect.
+
+[03:37] Eu tenho essa função inspect e eu só a uso aqui dentro, eu quero expô-la. Ou seja, quem usar o meu módulo, o módulo chamado MeuModulo, não pode ter acesso a inspect. Então eu posso criar funções privadas através da diretiva ou da macro defp, que é definição de uma função privada.
+
+[03:58] Então se eu tentar rodar iex “teste.exs”, eu tenho acesso, tudo continua funcionando.
+
+[04:08] Estamos tentando acessar o MeuModulo.Math, mas ele não está disponível. Então eu tenho que fazer do jeito mais difícil. Eu vou carregar o math.exs e depois eu vou compilar o arquivo “teste.exs” e isso vai gerar o meu módulo.
+
+[04:24] Agora sim. Voltando para o nosso assunto, eu transformei a função inspect em uma função privada. Se ela é uma função privada, eu não posso chamar através de MeuModulo.inspect(“Alguma coisa”). E vamos ver o que acontece.
+
+[04:42] Essa função não está definida, ou seja, ela não existe, ou é privada. Então, não conseguimos mais acessá-la de fora do módulo. Antes de finalizar, só um detalhe que eu acabei não citando, eu utilizei “se” ao invés de import file, é a mesma coisa, a diferença é só como ele nos exibe. Eu estou compilando esse arquivo e trazendo para o meu terminal interativo e isso gera para nós o nosso módulo.
+
+[05:03] Mas, recapitulando o que falamos aqui, nós podemos ter funções sendo definidas de uma forma mais simplificada. Tudo em uma única linha quando temos somente uma instrução dentro. Se tem uma instrução só dentro e eu quero definir uma função, dar um nome para ela, eu posso definir a função com seus parâmetros, vírgula do, dois pontos e o corpo que vai ser retornado.
+
+[05:28] E já vimos que não podemos definir funções fora de módulo, isso não é possível. E se eu quiser uma função que não seja acessível fora do módulo, eu posso ter uma função privada. E um detalhe, se eu chamar o nosso “Olá, mundo”, por exemplo, MeuModulo.ola_mundo, ele utiliza a função inspect e ele continua funcionando.
+
+[05:50] Repara que ele começa a inspeção, exibe a soma de 2 + 2 e termina a inspeção. Então eu consigo acessar funções privadas somente de dentro do mesmo módulo. Então, isso pode nos ajudar a organizar nosso código, separar pedaços de código, sem expor mais funcionalidades. Vamos continuar nesse mundo de funções e eu quero mostrar outra forma de criarmos funções.
+
+[06:14] Como eu disse, funções podem ser passadas por parâmetro e até atribuídas a variáveis. Então nesses cenários eu não preciso criar uma função, dar um nome para ela e depois passar por parâmetro. Eu posso ter o que conhecemos como função anônima. Então vamos ver isso no próximo vídeo.
+
+@@05
+Funções anônimas
+
+[00:00] Olá, pessoal. Boas-vindas de volta. Então nos vídeos anteriores eu comentei que funções são cidadãos de primeira classe no Elixir. Ou seja, podemos atribuir uma função a uma variável, podemos passar essa função por parâmetro, podemos retornar uma função. Então funções são como qualquer outro tipo e podemos utilizá-las assim. Vamos começar a entender isso e depois vemos para que isso seria útil.
+[00:24] Então imagina que eu tenho uma função chamada is_number, se eu passo um número para ela, ela retorna true, se eu passo algo que não é número, por exemplo, uma lista, ela retorna falso.
+
+[00:34] Então imagina que eu queira passar essa função por parâmetro para alguma outra função ou que eu queira simplesmente criar uma variável que tenha essa função. Uma variável i_n de is number. Como eu posso criar essa variável, o que eu coloco? Para eu pegar uma função, se eu simplesmente executar i_n = is_number, eu vou executar a função is_number sem nenhum parâmetro e isso não vai funcionar, não existe uma função is_number que não recebe nenhum parâmetro.
+
+[01:02] Então para informar que eu quero capturar essa função para utilizá-la, eu posso utilizar o operador de captura. Mas isso ainda tem um erro, ele está informando que precisamos utilizar o formato função, barra e a aridade ou arity.
+
+[01:21] O que isso quer dizer? Eu preciso informar o número de parâmetros que essa função que eu estou pegando recebe. Então is_number, no caso, recebe um parâmetro. Por que eu preciso fazer isso? Eu posso ter várias funções is_number e cada uma delas recebe um número de parâmetros diferentes ou até, embora o número não seja diferente, o tipo de parâmetro é outro, por causa do pattern matching.
+
+[01:45] Basicamente, eu preciso informar a aridade, qual é o número de parâmetros que ela recebe, basicamente. Então dessa forma peguei a variável i_n, foi criada com o valor de is_number.
+
+[01:57] Só que se eu tentar executar i_n(2), ele vai me informar que a função i_n não existe. Então como eu posso, a partir de uma variável, que é uma função, executá-la?
+
+[02:08] Eu só preciso colocar o ponto, então i_n.(2), que eu estou informando que eu estou chamando a função que está na função i_n e não em uma função que se chama i_n e dessa forma já conseguimos chamar essa função.
+
+[02:22] Então já entendemos como utilizar uma função como variável e isso pode ser, se eu receber uma função por parâmetro, eu posso executar dessa forma, através do ponto.
+
+[02:34] Agora, como e quando eu passaria isso por parâmetro? Imagina que eu tenho uma lista que vai ter os números lista = (1, 2, 3). E eu quero nessa lista, percorrê-la e multiplicar cada um dos números por 2, ou seja, eu quero receber de volta outra lista, contendo 2, 4 e 6. Como eu posso fazer isso? Eu posso utilizar uma função map. A função Enum.map pega um valor enumerável, no caso uma lista, e depois ela precisa também de uma função. Então essa função poderia ser uma função que criamos, então MeuModulo.mutiplica_por_2. Eu poderia fazer isso.
+
+[03:22] Só que, claro, passando os dois parâmetros, que essa função receberia 2 parâmetros ou no caso receberia um só, o número a multiplicar por dois.
+
+[03:30] Obviamente essa função não existe. Então como eu faço para ter uma função que eu vou utilizar em um lugar só, para passar por parâmetro ou algo assim? Eu posso utilizar funções anônimas. Então como eu crio uma função anônima? Coloco fn, a lista de parâmetros que vamos receber, eu vou receber um número só, uma seta e depois eu posso escrever minha função, fazer o que eu quiser, no meu caso vai ser numero * 2 e ao lado eu informo que eu finalizei essa função, então Enum.map(lista, fn (numero) -> numero * 2 end).
+
+[03:59] E agora eu tenho exatamente o resultado esperado. Eu criei uma função anônima, essa função não tem nome, mas eu posso atribuí-la a uma variável, eu posso passar por parâmetro, eu poderia retorná-la e assim conseguimos utilizar funções. Para quem vem de JavaScript, PH, C-Sharp, Java, já deve conhecer isso como short closure, função lâmbda, arrow function, cada linguagem tem seu nome, mas é o mesmo conceito basicamente.
+
+[04:25] E Elixir tem outra sintaxe, que eu evito utilizar, que eu acho confuso, mas quem está mais habituado talvez não tenha tanto problema. Então vamos escrever a mesma coisa, o Enum.map(lista, &(&1 * 2)), dentro eu vou capturar uma função e essa função vai ser pegar o primeiro parâmetro e multiplicar por 2, esse é o corpo da função e isso devolve o mesmo resultado para nós.
+
+[04:52] Então repara que batendo o olho, não é muito intuitivo entender o que está acontecendo. Mas basicamente, essa sintaxe está fazendo exatamente a mesma coisa que fn (numero) -> numero * 2 end). Mas eu não estou atribuindo um nome para o parâmetro que eu recebo, então eu não preciso do end também, porque eu não preciso informar qual palavra finalizou. Eu não utilizo nenhuma palavra mágica e eu só utilizo a posição dos meus parâmetros.
+
+[05:17] Então se eu recebesse 2 parâmetros, eu poderia utilizar essa sintaxe Enum.map(lita, &(&1 * 2)), se eu quisesse multiplicar o primeiro parâmetro pelo segundo, mas no nosso caso só temos um parâmetro.
+
+[05:26] Então de novo eu posso pegar essa função soma_2, ou seja, vai receber um número e somar 2, vai adicionar 2 a ele. Então eu pego um número e somo 2, então soma_2 = &(&1 + 2).
+
+[05:42] Então agora essa função soma_2 existe, eu posso passar o número 2 e receber o número 4. Posso passar o número 6 e receber o número 8, eu criei uma nova função com essa sintaxe, que particularmente eu evito utilizar.
+
+[05:57] Mas já falamos bastante de função, falamos sobre serem cidadãos de primeira classe, podermos passar por parâmetro, retornar, falamos de capturar funções, precisar passar a aridade, funções anônimas, a criação de funções anônimas com essa sintaxe de captura também, bastante controversa. Então, já estamos lidando bem com funções, agora vamos aprender a controlar o fluxo da nossa aplicação.
+
+[06:22] Já até vimos como poderíamos substituir um loop, não precisamos fazer loop em uma linguagem funcional, vamos criar funções que façam isso de alguma outra forma. Mas como eu redireciono o fluxo, como eu redireciono outros loops, que não seja utilizando as funções de Enum, enfim vamos aprender a controlar o fluxo, um pouco além do famoso if e else, mas tudo isso no próximo capítulo.
+
+```
+iex(2)> i_n = &is_number/1
+&:erlang.is_number/1
+iex(3)> i_n.(2)
+true
+iex(4)> i_n.(true)
+false
+iex(5)> lista = [1, 2, 3]
+[1, 2, 3]
+iex(6)> Enum.map(lista, fn (numero) -> numero * 2 end)
+[2, 4, 6]
+iex(7)> Enum.map(lista, &(&1 * 2))                    
+[2, 4, 6]
+iex(8)> 
+iex(8)> soma_2 = &(&1 + 2)
+#Function<42.125776118/1 in :erl_eval.expr/6>
+iex(9)> soma_2.(2)
+4
+iex(10)> soma_2.(6)
+8
+iex(11)> 
+```
+
+@@06
+Para saber mais: Closures
+PRÓXIMA ATIVIDADE
+
+Nesse vídeo a gente discutiu um pouco sobre funções anônimas. É muito comum criarmos funções anônimas quando queremos passar uma função por parâmetro, por exemplo. Aproveitamos o embalo e vimos 2 sintaxes diferentes para criar funções anônimas.
+Em programação funcional existe um termo importante de ser compreendido: Closure. Uma closure é uma função anônima com escopo léxico. Esse nome difícil quer dizer que uma clouse tem acesso ao escopo de onde ela foi definida, ou seja, ela consegue acessar variáveis que existem no local onde ela foi definida.
+
+Com closures, o seguinte código é possível:
+
+variavel = "Algum valor"
+funcao = fn () -> IO.puts(variavel) end
+funcao.()COPIAR CÓDIGO
+Repare que embora a variável variavel não exista dentro do corpo da função nem seja passado por parâmetro, nós conseguimos acessá-la. Isso é a definição de escopo léxico. É como se a closure herdasse e gravasse tudo que existe no momento em que ela foi definida.
+
+@@07
+Faça como eu fiz
+PRÓXIMA ATIVIDADE
+
+Chegou a hora de você seguir todos os passos realizados por mim durante esta aula. Caso já tenha feito, excelente. Se ainda não, é importante que você execute o que foi visto nos vídeos para poder continuar com a próxima aula.
+
+Continue com os seus estudos, e se houver dúvidas, não hesite em recorrer ao nosso fórum!
+
+@@08
+O que aprendemos?
+PRÓXIMA ATIVIDADE
+
+Nesta aula, aprendemos:
+Aprendemos sobre pattern matching;
+Conhecemos novos detalhes de sintaxe ao definir funções;
+Aprendemos sobre definição de funções anônimas.
+
