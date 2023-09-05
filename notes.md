@@ -792,7 +792,6 @@ Vimos as diretivas import, alias e require para trabalhar com módulos.
 
 @@01
 Projeto da aula anterior
-PRÓXIMA ATIVIDADE
 
 Caso queira, você pode baixar aqui o projeto do curso no ponto em que paramos na aula anterior.
 
@@ -856,7 +855,6 @@ Pattern Matching
 
 @@03
 Casando padrões
-PRÓXIMA ATIVIDADE
 
 Vimos neste vídeo o que é o famoso Pattern Matching do Elixir. Ele faz o casamento de padrões e expressões, permitindo que nós criemos variáveis, façamos verificações e criemos estruturas mais complexas que vamos ver no futuro. Levando em consideração o seguinte código:
 {a, b, c} = {:hello, "world"}COPIAR CÓDIGO
@@ -980,7 +978,6 @@ iex(11)>
 
 @@06
 Para saber mais: Closures
-PRÓXIMA ATIVIDADE
 
 Nesse vídeo a gente discutiu um pouco sobre funções anônimas. É muito comum criarmos funções anônimas quando queremos passar uma função por parâmetro, por exemplo. Aproveitamos o embalo e vimos 2 sintaxes diferentes para criar funções anônimas.
 Em programação funcional existe um termo importante de ser compreendido: Closure. Uma closure é uma função anônima com escopo léxico. Esse nome difícil quer dizer que uma clouse tem acesso ao escopo de onde ela foi definida, ou seja, ela consegue acessar variáveis que existem no local onde ela foi definida.
@@ -994,7 +991,6 @@ Repare que embora a variável variavel não exista dentro do corpo da função n
 
 @@07
 Faça como eu fiz
-PRÓXIMA ATIVIDADE
 
 Chegou a hora de você seguir todos os passos realizados por mim durante esta aula. Caso já tenha feito, excelente. Se ainda não, é importante que você execute o que foi visto nos vídeos para poder continuar com a próxima aula.
 
@@ -1002,10 +998,196 @@ Continue com os seus estudos, e se houver dúvidas, não hesite em recorrer ao n
 
 @@08
 O que aprendemos?
-PRÓXIMA ATIVIDADE
 
 Nesta aula, aprendemos:
 Aprendemos sobre pattern matching;
 Conhecemos novos detalhes de sintaxe ao definir funções;
 Aprendemos sobre definição de funções anônimas.
 
+####
+
+@06-Controle de fluxo
+
+@@01
+Projeto da aula anterior
+
+Caso queira, você pode baixar aqui o projeto do curso no ponto em que paramos na aula anterior.
+
+https://github.com/alura-cursos/2310-elixir/archive/refs/tags/aula-5.zip
+
+@@02
+Bom e velho if/else
+
+[00:00] Olá, pessoal. Boas-vindas de volta. Então como eu comentei, já vimos bastante sobre sintaxe básica, entendemos como funcionam as funções, agora vamos controlar o fluxo da nossa aplicação. Então, eu quero criar uma função simples. Vou criar um novo arquivo e chamá-lo de “enum.exs”. Nós vimos o módulo “enum” que tem algumas funções.
+[00:24] Então vou criar o meu módulo, defmodule MeuModulo.Enum, porque podemos criar funções que vão lidar com enumeráveis também, com listas. Então eu quero criar algo como o primeiro item de uma lista. Então, def primeiro(lista) do e o que eu quero fazer? Eu quero simplesmente retornar a chamada de hd, ou seja, de head dessa lista.
+
+[00:54] Então vamos lá. Vou executar o meu iex “enum.exs”. Só vou carregar. E se eu chamo MeuModulo.Enum.primeiro(1, 2, 3), eu espero que ela retorne 1.
+
+[01:09] Funcionou. Agora se eu passo uma lista vazia eu não consigo chamar a função hd em uma lista vazia. Então preciso verificar, se essa lista for vazia, retorna nulo, caso contrário retorna o hd. Então, o que eu posso fazer? Utilizar o famoso if_else. Então como funciona no Elixir? Como em qualquer outra sintaxe. Mas não pula essa aula ainda, que vamos ver uma coisa interessante.
+
+[01:35] Então se a lista for vazia, eu posso utilizar o lenght, então if length(lista) == 0 do, então eu faço o do e no final eu coloco um end. Eu não preciso dos parêntesis antes e depois de length.
+
+[01:53] Então se a lista for vazia eu quero retornar aquele nil. Lembrando que false, true e nil não precisam dos dois pontos. E o else entra após nil, eu vou retornar a head da lista, ou seja, a cabeça.
+
+[02:09] Então inicialmente nada novo, vamos recompilar o r(MeuModulo.Enum0, a princípio recompilado. Quando eu executo agora, com uma lista vazia, eu recebo nulo. Agora um outro detalhe, de certa forma uma especificidade, é que além do if, o Elixir também tem um unless. Então unless length(lista) == 0 do, ou seja, a menos que a lista esteja vazia, vamos retornar o cabeçalho dessa lista, end.
+
+[02:48] Então vamos ver o que acontece. Vou recompilar e executar. Por padrão, uma função que não executa nenhuma instrução, já retorna nulo, então temos o nosso resultado conforme o esperado.
+
+[02:59] O unless poderia ter um else, só que nesse caso ele é redundante, então eu não preciso dele, mas o resultado é o mesmo.
+
+[03:06] Aprendemos if e else, ou seja, não aprendemos muita coisa, mas aprendemos o unless, agora o que eu realmente quero mostrar é, via de regra, nesses cenários que estamos, nesse exato cenário, eu não utilizaria uma condicional, eu utilizaria pattern matching, é então começamos a entrar nos detalhes.
+
+[03:34] Agora eu estou fazendo aqui, estou definindo uma função que se chama primeiro e recebe uma lista. Recebendo essa lista, o que ele vai fazer? Vai retornar a cabeça dessa lista. Mas agora eu vou definir também, então def primeiro() e embaixo ela não simplesmente recebe o parâmetro, nenhuma função simplesmente recebe o parâmetro. Quando eu passo um parâmetro para uma função acontece o pattern matching.
+
+[03:59] Então eu posso fazer essa verificação do pattern matching assim. Se o que enviarem para mim for uma lista vazia, então retorna nulo, def primeiro([]), do: nil.
+
+[04:09] Então não preciso de if else, não preciso de unless nem nada do tipo, quando eu recompilo esse meu módulo e executo, resultado exatamente como o esperado. Se eu passar uma lista que não é vazia, ele retorna o primeiro item.
+
+[04:26] O que fizemos agora? Aprendemos a utilizar condicionais com if, elsee unless, um detalhe importante, temos o if, temos o unless, temos o else, só que não temos um elseif ou algo assim. Então para termos o equivalente a elseif eu preciso criar um else e dentro desse else criar um if. Então isso causa uma sintaxe não muito agradável. Vamos falar um pouco mais sobre isso em breve.
+
+[04:52] Mas recapitulando, vimos if, else, unless e vimos também como ter condicionais sem precisar ter condicionais, ou seja, utilizando pattern matching. E o que fizemos nas linhas 1 e 2 agora, é um estilo de código que você vai ver bastante utilizando Elixir, você vai ver várias definições da mesma função para ser executada em casos diferentes.
+
+[05:13] Para isso também podemos utilizar outra funcionalidade, as conhecidas como guard clauses ou cláusulas de guarda, enfim, existem várias formas de executarmos uma função ou outra, ou seja, uma definição ou outra da mesma função, dependendo dos parâmetros que chegam.
+
+[05:29] Então vamos encerrar essa primeira parte de condicionais e vamos falar exatamente sobre o caso em que precisamos ter um monte de elseif. O que podemos fazer isso normalmente? Via de regra, outras sintaxes usam o switch case. Então vamos ver como isso ficaria em Elixir.cal
+
+@@03
+Cond vs Pattern Matching
+
+[00:00] Olá, pessoal. Boas-vindas de volta. Então vamos dar uma olhada em como ficara um código cheio de elseif. Não temos a instrução elseif, então temos que ir adicionando dentro do else um novo if.
+[00:12] Eu tenho aqui uma função que pega a abreviação do dia da semana. Então ela recebe um dia da semana, se for o átomo segunda, ela devolve a abreviação “Seg” e assim por diante. E no final, se for sábado, devolve “Sab”, caso contrário é “Dom”.
+
+[00:27] Então vamos executar isso só para vocês verem mais ou menos isso funcionando. E carreguei o MeuModulo.Calendario.abreviacao_dia_semana(Segunda) e se eu passar segunda eu tenho “Seg”, se eu passar Quinta, eu vou ter “Qui”, se eu passar sábado eu vou ter “Sab” e se eu passar “Domingo”.
+
+[00:52] Eu escrevi errado e apareceu o “Dom” de domingo. E você muito provavelmente já sabe o motivo, eu precisaria adicionar uma nova condição. Então quando escrevemos if else, mesmo que a nossa condição não bata com nenhuma das outras, se tivermos um else vai cair, enfim. Repara que não é legal escrever dessa forma.
+
+[01:12] Então eu vou deixar arquivo para quando você baixar o projeto final, você ver essa função criada, mas você não precisa criá-la. Vamos criar def abreviação_dia_semana2(dia_semana) do. E vamos lá. Vamos fazer de outra forma com o switch case. Já conhecemos de outras linguagens, então case dia_semana do e embaixo o end.
+
+[01:39] Então se for :Segunda -> “Seg”, se for :Terca -> “Ter”. Não vou ficar escrevendo todos os dias, vocês já entenderam o propósito, então vou recarregar o MeuModulo.calendario.
+
+[01:55] Recarreguei. Agora vamos executar o dia_semana2 passando segunda para ele e isso vai cair no “Seg”, se eu passar terça vai cair no “Ter”. Se eu passar alguma coisa que não existe, por exemplo, quarta, eu não defini, ele nos devolve um erro.
+
+[02:11] Então é exatamente isso que eu quero, se for um caso que eu não especifiquei, eu não quero devolver algo inesperado. Então eu posso ter aqui um valor padrão. E como ignoramos um valor através de pattern matching? Através do underline.
+
+[02:26] E sim, isso que estamos fazendo é pattern matching, do dia da semana com algum dos valores seguintes. Então se ele não casar com nenhum desses, com certeza vai casar com ignorar. Então, colocamos o nosso valor padrão, então -> “Dia inválido”. Vamos recarregar e tentando pegar um dia que não existe, ele retorna “Dia inválido”.
+
+[02:47] Essa foi a segunda opção, fica de desafio pra você colocar todos os outros dias da semana, não vou colocar para não me repetir, mas vamos para mais uma opção, def abreviacao_dia_semana3(dia_Semana) do e end embaixo.
+
+[03:04] E o que temos? Já fizemos com if, fizemos com case e tem uma outra sintaxe que é a cond. Ou seja, eu vou criar condições dentro. Então é como se fosse um sintaxe sugar para else e elseif. Então se eu tenho uma condição que eu não posso simplesmente utilizar a igualdade, o pattern matching puro, se eu preciso fazer comparações, eu posso utilizar o cond.
+
+[03:29] Dentro do cond eu posso ter várias condições. Então dia_semana == :Segunda -> “Seg”. Se dia_semana == :Terca -> “Ter” e assim em diante. E no final, eu não posso fazer isso, porque não estou fazendo pattern matching de nenhuma variável com isso, então eu vou colocar uma condição que sempre avalie como verdadeiro, porque se não caírem nenhuma das outras, vai cair essa. E que condição é sempre verdadeira? Verdadeiro. Então dessa forma eu posso colocar o true -> “Dia inválido”.
+
+[04:06] Então vou salvar, recarregar e vamos lá. O dia da semana 3, se eu selecionar Segunda, eu espero que retorne “Seg”, se eu colocar Terça, “Ter”, e se eu colocar qualquer outro, que não seja segunda ou terça, porque são os únicos que eu tenho, ele vai me dar um dia inválido.
+
+[04:27] Então já vimos 3 formas de fazer essas condicionais, mas já tínhamos outra de pattern matching. Então vamos utilizar pattern matching para definir nossas funções. Então def abreviacao_dia_semana4(:segunda). do: “Seg”. Se eu receber segunda, eu vou simplesmente retornar “Seg”. Então repara que dessa forma eu tenho uma função que só recebe um parâmetro se for segunda, se for qualquer outro, não é ela que vai ser executada. Então, vamos colocar para Terça, Quarta, Quinta.
+
+[05:02] E se eu quiser para algum parâmetro genérico, um parâmetro qualquer, eu posso colocar o nome do parâmetro, mas eu não vou utilizar essa variável, então eu posso ignorar com underline. Então vamos lá. Vamos adicionar Segunda, Terça, Quarta e dia inválido.
+
+[05:20] Então dessa forma temos uma linha para cada caso, um pouco mais explícito direto na definição da função. Então vou redefinir e chamar o dia da semana 4. Terça vai retornar “Ter”, segunda vai retornar “Seg” e algum outro vai retornar “Dia inválido”.
+
+[05:39] Então temos 4 formas de termos condicionais no nosso código, cada uma mais diferente da outra. E única que eu diria para nunca fazer é a com vários ifs e elses. Eu, particularmente, utilizaria o case, porque é como eu estou habituado a escrever em linguagens imperativas também, se eu precisasse de um cenário desse ou algo parecido.
+
+[06:00] A utilização do cond e de pattern matching são bem similares, mas entre essas duas eu preferiria o pattern matching, eu acho um pouco mais explícito, não preciso ficar repetindo essa comparação. Mas nesse cenário é literalmente questão de gosto, você não ganha ou perde em performance nos dois casos.
+
+[06:22] Então se você está em uma equipe que tem mais facilidade de ler utilizando pattern matching, é essa abordagem que você vai tomar. Se você está em uma equipe que trabalha mais com linguagens imperativas e utilizar o case vai deixar isso mais claro, utiliza o case. Então é uma questão de gosto, mas eu quis mostrar no mesmo vídeo todas as possibilidades, não todas, mas várias possibilidades, de termos condicionais em Elixir.
+
+[06:45] Mas não falamos de loop ainda. Então no próximo vídeo eu só quero deixar uma pulga atrás da orelha de vocês, antes de finalizarmos, batendo esse papo, conversando sobre loops.
+
+@@04
+Múltiplas funções
+
+Neste vídeo nós vimos que é possível ter múltiplas funções com o mesmo nome. Para que isso funcione sem problema, é preciso que os parâmetros sejam diferentes. Mas no nosso caso, todas as funções abreviacao_dia_semana4 recebiam um único parâmetro.
+Como o Elixir sabia qual das funções abreviacao_dia_semana4 / 1 executar?
+
+Através de condicionais internas.
+ 
+Alternativa correta
+Através de programação funcional.
+ 
+Alternativa correta
+Através de Pattern Matching.
+ 
+Alternativa correta! Esse é um dos casos onde Pattern Matching se faz útil. Podemos fazer o casamento de expressões e apenas se o parâmetro definido na função casar com o que for passado, a função será executada. Também usamos pattern matching em nosso case. :-)
+
+@@05
+Recursão
+
+[00:00] Olá, pessoal. Boas-vindas de volta. Então já falamos sobre condicionais, vimos várias formas de fazer condicionais, não todas, mas agora vamos falar sobre loops. Então nesse momento recebemos um banho de água fria, pelo menos eu, como eu vim de uma linguagem imperativa, na verdade, de várias linguagens imperativas, Elixir foi a primeira linguagem puramente funcional que eu aprendi.
+[00:21] Na verdade, eu já tinha aprendido Clojure anteriormente, mas eu nunca me aprofundei, então Elixir é a primeira linguagem que eu estudo mais a fundo e Elixir não possui loops, while, for, não tem isso. Então como podemos realizar operações que precisam percorrer elementos?
+
+[00:38] Já falamos sobre isso, pelo menos eu comentei bem por alto, que é o uso de recursão. Então vamos entender como podemos fazer para utilizar recursão, na prática, para implementar o que faríamos em uma linguagem imperativa, usando loop.
+
+[00:52] Então vou criar um módulo chamado “loop.exs”. Então def module MeuModulo.Loop do e vamos definir uma função que vai pegar tabuada. Ela pega tabuada de determinado número, multiplicado, então def tabuada(multiplicador) do. Essa função vai receber um multiplicador e vai executar um código multiplicando esse número no multiplicador por outros números de 1 até 10.
+
+[01:28] Então, por exemplo, imagina que eu passo o número 5, ele vai executar 5 * 1, 5 * 2, 5 * 3. Então vamos pensar em como eu vou fazer isso. Eu sei que eu preciso, através de tabuada, chamar a função tabuada de novo. Então eu vou cair em recursão de alguma forma. Mas eu preciso passar, além do multiplicador, alguma outra coisa que o número pelo qual ele vai se multiplicar.
+
+[01:53] Então eu sei que em algum cenário eu vou acabar sendo passado o multiplicador e o número maior que 10 e ali que eu quero encerrar. Então vamos começar definindo a função que encera a nossa recursão. Então, eu vou definir uma função tabuada que recebe o multiplicador e algum outro parâmetro, que vai ser o número 11, então def tabuada(multiplicador, 11) do, ou seja, alguma coisa acima de 10. E isso simplesmente vai retornar nulo.
+
+[02:26] Mas como eu não estou utilizando esse parâmetro, posso ignorá-lo. Porém, o que acontece com todas as outras execuções? Então em tabuada o que eu quero é executar a função tabuada, multiplicando o multiplicador por algum número, por exemplo, começando pelo 1, então vamos exibir tabuada, vai executar multiplicando o multiplicador pelo número 1. Então vamos lá, def tabuada(produto1, produto2) do, que ela vai fazer uma multiplicação. Então, vamos fazer a multiplicação. Eu vou exibir o puts produto 1 e produto2, então IO.puts(produto1, produto2).
+
+[03:09] Na verdade, eu vou exibir uma mensagem, IO.puts(“#{produto1} x #(produto2), ou seja, estou exibindo um texto e agora eu faço a conta, IO.puts(“#{produto1} x #(produto2) = #{produto1 * produto2}”. E eu posso colocar essa conta toda dentro desse operador de interpolação de Strings.
+
+[03:39] Então exibir essa multiplicação e chamo a tabuada de novo, tabuada(produto1, produto2 + 1). Então vamos entender o que vai acontecer. Eu vou chamar uma função tabuada, que recebe um parâmetro. Então essa função que vai ser executada, ela é a única que recebe um parâmetro só. E esse multiplicador vai ser o número 5, por exemplo. Ela vai chamar uma outra função, que recebe dois parâmetros, multiplicador e o número 1.
+
+[04:08] Essa função def tabuada(_, 11), do: nil, mas com pattern matching ela espera que o segundo parâmetro seja o número 11. Então vamos cair na função IO.puts(“#{produto1} x #{produto2} = #{produto1 * produto2}”). O que essa função faz? Exibe a nossa tabuada em si e chama ela mesmo de novo, então ela executa a recursão. Só que o segundo parâmetro vai ser o que ela recebeu, o produto2, +1.
+
+[04:30] Então ao invés de ser esse número 1, agora vai ser o número 2 e depois o 3, 4, 5, 6, até chegar no 10, então ela vai chamar de novo uma tabuada passando o produto1 vezes 10, ou seja, o segundo parâmetro vai ser 11. Qual função espera 11 como segundo parâmetro? Essa def tabuada(_, 11), do: nil, que é a primeira definida e vai interromper a nossa recursão, porque ela vai simplesmente retornar sem fazer nada.
+
+[04:56] Então vamos executar esse código. Vou abrir o terminal, vou abrir o nosso terminal interativo no nosso loop e MeuModulo.Loop.tabuada(5), eu quero ver a tabuada do 5.
+
+[05:26] E perfeito, temos a tabuada do 5 e no final ela não retorna nada, retorna nulo. Só quero fazer mais duas coisas, a única função que eu vou realmente chamar por fora desse módulo, é essa def tabuada(_, 11), do: nil, então as outras eu vou deixar privadas. Então vamos lá, abri de novo meu terminal e recompilar r(MeuModulo.Loop).
+
+[05:56] Se eu executo de novo, eu tenho o mesmo resultado, não tenho nada de diferente. E agora eu quero deixar um desafio para vocês. Eu quero que vocês, ao invés de exibirem IO.puts(“#{produto1} x #{produto2} = #{produto1 * produto2}”), eu quero que vocês retornem uma lista, eu quero que a função tabuada devolva uma lista e não devolva nulo. Então isso vai ser um pouco mais complexo, por isso eu vou deixar de desafio.
+
+[06:24] Com todos os conhecimentos que você tem, eu quero que você ao chamar essa tabuada, utilize a recursão e devolva a lista dessas multiplicações, ou seja, 5, 10, 15, 20, 25. Esse é o desafio.
+
+[06:36] Mas antes de encerrar, eu quero falar de um detalhe quando tratamos de recursão. Nesse caso nós temos uma função que está chamando na prática outra função, não é recursão ainda. Agora, uma função está chamando ela mesmo nas linhas 8 e 10. E isso, quando falamos de linguagens imperativas, dependendo da profundidade da recursão, podemos acabar estourando a pilha, porque temos uma função que executa outra, que executa outra e isso tudo vai sendo adicionado na pilha de execução.
+
+[07:05] Só que Elixir e várias outras linguagens funcionais possuem o que é conhecido como tale recursion, recursão de cauda. O que isso quer dizer, super simplificado. Se a última chamada da sua função recursiva for para ela mesmo, a Erlang, e por consequência, o Elixir, consegue fazer uma otimização por baixo dos panos, de forma que essa outra chamada não é adiciona da na stack.
+
+[07:32] É como se por baixo dos panos o Elixir fosse inteligente o suficiente para transformar isso em um loop. Então, não corremos o perigo de ter a pilha estourando. Mas se a última execução dessa nossa função recursiva não for ela mesma, o tale recursion não é possível. Então fica o aviso para tomar bastante cuidado na hora de fazer recursão.
+
+[07:54] Mas essa é a forma com a qual podemos implementar loops utilizando Elixir, através de recursão e pattern matching. Repara que não precisamos ficar escrevendo if, se chegar nessa condição, sai, faz um return ou algo do tipo. Utilizamos pattern matching para ter definições diferentes e as chamadas irem para as definições corretas. Dessa forma tivemos nossa condição de saída em uma função, temos a nossa função de entrada em outra função e executamos a recursão em cima em uma outra função, tudo separado.
+
+[08:27] Então isso é uma forma diferente, se você vem de linguagens imperativas, isso é diferente, isso não é óbvio, não é uma coisa que batemos o olho e pensamos que é completamente legível. Mas conforme vamos nos habituando com linguagens funcionais e com escrever código utilizando o paradigma funcional, isso vai fazendo cada vez mais sentido.
+
+[08:45] Então a única recomendação que eu tenho é: Pratique. E até por isso eu deixei esse desafio de ao invés de exibir todas as multiplicações, retorne uma lista com elas.
+
+@@06
+Faça como eu fiz
+
+Chegou a hora de você seguir todos os passos realizados por mim durante esta aula. Caso já tenha feito, excelente. Se ainda não, é importante que você execute o que foi visto nos vídeos para poder continuar com os próximos cursos que tenham este como pré-requisito.
+
+Continue com os seus estudos, e se houver dúvidas, não hesite em recorrer ao nosso fórum!
+
+https://github.com/alura-cursos/2310-elixir/archive/refs/tags/aula-6.zip
+
+@@08
+O que aprendemos?
+
+Nesta aula, aprendemos:
+Vimos como escrever if/else em Elixir;
+Aprendemos a usar cond e case;
+Aprendemos a realizar loops com recursão.
+
+@@09
+Conclusão
+
+[00:00] Olá, pessoal. Parabéns por chegar ao final do curso de Elixir: Sintaxe, Programação funcional e Pattern Matching . E eu quero só mostrar só um detalhe antes daquele bate-papo final. Tivemos um aviso de definição duplicada, mas eu acabei passando rápido para executar logo e não tirar o foco, mas eu não podia deixar de ler a mensagem de erro depois do vídeo para entender o que aconteceu.
+[00:19] E tem um detalhe, o compilador do Elixir pede que as funções com definições iguais, ou seja, função com o mesmo nome e mesmo número de parâmetros, sejam agrupadas. Então se eu redefinir esse módulo, do jeito que ele está, nós temos um aviso.
+
+[00:37] “Cláusulas com o mesmo nome devem ser agrupadas juntas”, ou seja, temos duas funções “tabuada” que recebem dois parâmetros. Então se eu pegar def tabuada(_, 11), do: nil e trouxer para baixo e recompilar esse módulo, não temos mais aquele aviso e temos a tabuada sendo exibida exatamente igual. Então, só um último detalhe para finalizarmos.
+
+[01:00] E agora recapitulando o que aprendemos até aqui. Nós vimos primeiro nesse treinamento o que é Elixir e porquê utilizar. Vimos que ele brilha quando falamos de computação distribuída, programação paralela. E eu sei que ainda não vimo esse poder todo do Elixir nesse treinamento, mas seria coisa demais para colocar de uma vez só.
+
+[01:19] Então preferimos organizar esse treinamento para ser uma introdução ao Elixir, para aprendermos a sintaxe, os tipos de dados como listas, tuplas, átomos, mapas, keyword lists e depois entendemos a organização de módulos e dentro desses módulos suas funções.
+
+[01:35] Falamos bastante de funções, funções privadas, funções anônimas, referência para funções com aquele sintaxe de captura. Batemos um papo bem legal sobre pattern matching e já começamos a ver como ele pode ser útil, porque o pattern matching é utilizado em todos os lugares praticamente, na passagem de parâmetros, definição de variáveis, retorno. Então em vários lugares onde temos atribuição de algum valor, podemos fazer uso do pattern matching.
+
+[02:03] E através disso vimos como realizar condicionais com if, else, unless, cond, case e através do pattern matching. E também utilizando pattern matching, no final nós vimos como ter a recursão para não precisar escrever loop e dessa forma temos apenas funções e não uma estrutura diferente para fazer loop.
+
+[02:23] Essa é a escolha da linguagem em Elixir, várias outras linguagens funcionais também aderem a essa filosofia de não possuírem uma estrutura de loops e com o tempo nos habituamos, com o tempo passamos a achar isso mais normal e mais interessante.
+
+[02:38] Mas esse foi o resumo do que aprendemos, já quero te adiantar, eu já até falei, isso não é tudo que temos para aprender sobre Elixir, mas eu espero que você tenha gostado do que aprendemos até aqui. E eu espero que você, se tiver alguma dúvida, utilize o nosso fórum. Eu tento responder pessoalmente sempre que possível, mas quando eu não consigo, temos uma comunidade bastante assídua de alunos, moderadores, instrutores, e com certeza alguém vai poder te ajudar.
+
+[03:03] Então com isso começamos a nossa jornada utilizando o Elixir, mas mais uma vez, isso não é tudo que temos para aprender, e como temos mais coisa para aprendermos sobre Elixir, espero te ver em futuros treinamentos na Alura. Forte abraço e tchau.
